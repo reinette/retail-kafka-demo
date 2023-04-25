@@ -569,7 +569,7 @@
         <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values" enabled="true">
           <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
           <stringProp name="cacheKey">false</stringProp>
-          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/event.gs</stringProp>
+          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/events.gs</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="script"></stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
@@ -606,7 +606,7 @@
         <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values" enabled="true">
           <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
           <stringProp name="cacheKey">false</stringProp>
-          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/events.gs</stringProp>
+          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/events.gs</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="script"></stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
@@ -887,7 +887,7 @@ try {
         <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values" enabled="true">
           <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
           <stringProp name="cacheKey">false</stringProp>
-          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/events.gs</stringProp>
+          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/events.gs</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="script"></stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
@@ -1308,7 +1308,7 @@ try {
           <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
             <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
             <stringProp name="cacheKey">false</stringProp>
-            <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/transaction.gs</stringProp>
+            <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/transaction.gs</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="script"></stringProp>
             <stringProp name="scriptLanguage">groovy</stringProp>
@@ -2029,7 +2029,7 @@ try {
             <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
               <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
               <stringProp name="cacheKey">false</stringProp>
-              <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/transaction.gs</stringProp>
+              <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/transaction.gs</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="script"></stringProp>
               <stringProp name="scriptLanguage">groovy</stringProp>
@@ -2555,7 +2555,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
             <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
             <stringProp name="cacheKey">false</stringProp>
-            <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/transaction.gs</stringProp>
+            <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/transaction.gs</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="script"></stringProp>
             <stringProp name="scriptLanguage">groovy</stringProp>
@@ -2885,11 +2885,35 @@ without actual network activity. This helps debugging tests.</stringProp>
         <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Product Values" enabled="true">
           <stringProp name="TestPlan.comments">Create random categories and values to populate products and prices with discounts that can match with our clickstream later.</stringProp>
           <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/product.gs</stringProp>
+          <stringProp name="filename">functions/product.gs</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="script"></stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223Sampler>
+        <hashTree/>
+        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Producer - Product" enabled="true">
+          <stringProp name="kafkaProducerClientVariableName">KafkaProductProducerClient</stringProp>
+          <stringProp name="kafkaTopic">retail.products</stringProp>
+          <stringProp name="partitionString"></stringProp>
+          <stringProp name="kafkaMessageKey">${product_id}</stringProp>
+          <stringProp name="kafkaMessage">{
+  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
+  &quot;Name&quot;: &quot;${product_name}&quot;,
+  &quot;ProductURL&quot;: &quot;https://pim.marketingco.io/${product_id}&quot;,
+  &quot;BrandName&quot;: &quot;${mockValues.productBrand}&quot;,
+  &quot;ListPrice&quot;: &quot;${mockValues.productPrice}&quot;,
+  &quot;SalePrice&quot;: &quot;${mockValues.productSalePrice}&quot;,
+  &quot;Availability&quot;: &quot;${mockValues.productAvail}&quot;,
+  &quot;AvailableQty&quot;: &quot;${__Random(1,85,)}&quot;,
+  &quot;RecoStatus&quot;: &quot;${__RandomString(1,YN)}&quot;,
+  &quot;Size&quot;: &quot;${__RandomString(1,SML)}&quot;,
+  &quot;Color&quot;: &quot;${mockValues.productColor}&quot;,
+  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,49,)}&quot;,
+  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
+  &quot;Custom attributes&quot;: &quot;&quot;
+}</stringProp>
+          <collectionProp name="messageHeaders"/>
+        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
         <hashTree/>
         <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Product Sampler" enabled="false">
           <boolProp name="WAITING">false</boolProp>
@@ -2945,30 +2969,6 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="TestPlan.comments">Enable this to make sure your code is generating the right values</stringProp>
         </kg.apc.jmeter.samplers.DummySampler>
         <hashTree/>
-        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Producer - Product" enabled="true">
-          <stringProp name="kafkaProducerClientVariableName">KafkaProductProducerClient</stringProp>
-          <stringProp name="kafkaTopic">retail.products</stringProp>
-          <stringProp name="partitionString"></stringProp>
-          <stringProp name="kafkaMessageKey">${product_id}</stringProp>
-          <stringProp name="kafkaMessage">{
-  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
-  &quot;Name&quot;: &quot;${product_name}&quot;,
-  &quot;ProductURL&quot;: &quot;https://pim.marketingco.io/${product_id}&quot;,
-  &quot;BrandName&quot;: &quot;${mockValues.productBrand}&quot;,
-  &quot;ListPrice&quot;: &quot;${mockValues.productPrice}&quot;,
-  &quot;SalePrice&quot;: &quot;${mockValues.productSalePrice}&quot;,
-  &quot;Availability&quot;: &quot;${mockValues.productAvail}&quot;,
-  &quot;AvailableQty&quot;: &quot;${__Random(1,85,)}&quot;,
-  &quot;RecoStatus&quot;: &quot;${__RandomString(1,YN)}&quot;,
-  &quot;Size&quot;: &quot;${__RandomString(1,SML)}&quot;,
-  &quot;Color&quot;: &quot;${mockValues.productColor}&quot;,
-  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,49,)}&quot;,
-  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
-  &quot;Custom attributes&quot;: &quot;&quot;
-}</stringProp>
-          <collectionProp name="messageHeaders"/>
-        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
-        <hashTree/>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Populate Store Organization List" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">stoptest</stringProp>
@@ -2986,6 +2986,29 @@ without actual network activity. This helps debugging tests.</stringProp>
         <stringProp name="TestPlan.comments">&quot;Organization&quot; in the data model</stringProp>
       </ThreadGroup>
       <hashTree>
+        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Organization - Record" enabled="false">
+          <stringProp name="kafkaProducerClientVariableName">KafkaOrganizationProducerClient</stringProp>
+          <stringProp name="kafkaTopic">retail.organizations</stringProp>
+          <stringProp name="partitionString"></stringProp>
+          <stringProp name="kafkaMessageKey">${store_id}</stringProp>
+          <stringProp name="kafkaMessage">{
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${store_id}&quot;,
+  &quot;Name&quot;: &quot;${store_name}&quot;,
+  &quot;Status&quot;: &quot;Open&quot;,
+  &quot;Type&quot;: &quot;${__RandomString(1,DPWO)}&quot;,
+  &quot;Country&quot;: &quot;US&quot;,
+  &quot;State&quot;: &quot;${store_state}&quot;,
+  &quot;City&quot;: &quot;${store_city}&quot;,
+  &quot;Address1&quot;: &quot;${store_street_address}&quot;,
+  &quot;Address2&quot;: &quot;&quot;,
+  &quot;Zip&quot;: &quot;${store_zip}&quot;,
+  &quot;ExcludeAsClosestStore&quot;: &quot;N&quot;,
+  &quot;Phone&quot;: &quot;${store_phone}&quot;,
+  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2008/08/07,2022/04/20,,)}&quot;
+}</stringProp>
+          <collectionProp name="messageHeaders"/>
+        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+        <hashTree/>
         <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Organization Sampler" enabled="false">
           <boolProp name="WAITING">false</boolProp>
           <boolProp name="SUCCESFULL">true</boolProp>
@@ -3014,29 +3037,6 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="URL"></stringProp>
           <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
         </kg.apc.jmeter.samplers.DummySampler>
-        <hashTree/>
-        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Organization - Record" enabled="false">
-          <stringProp name="kafkaProducerClientVariableName">KafkaOrganizationProducerClient</stringProp>
-          <stringProp name="kafkaTopic">retail.organizations</stringProp>
-          <stringProp name="partitionString"></stringProp>
-          <stringProp name="kafkaMessageKey">${store_id}</stringProp>
-          <stringProp name="kafkaMessage">{
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${store_id}&quot;,
-  &quot;Name&quot;: &quot;${store_name}&quot;,
-  &quot;Status&quot;: &quot;Open&quot;,
-  &quot;Type&quot;: &quot;${__RandomString(1,DPWO)}&quot;,
-  &quot;Country&quot;: &quot;US&quot;,
-  &quot;State&quot;: &quot;${store_state}&quot;,
-  &quot;City&quot;: &quot;${store_city}&quot;,
-  &quot;Address1&quot;: &quot;${store_street_address}&quot;,
-  &quot;Address2&quot;: &quot;&quot;,
-  &quot;Zip&quot;: &quot;${store_zip}&quot;,
-  &quot;ExcludeAsClosestStore&quot;: &quot;N&quot;,
-  &quot;Phone&quot;: &quot;${store_phone}&quot;,
-  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2008/08/07,2022/04/20,,)}&quot;
-}</stringProp>
-          <collectionProp name="messageHeaders"/>
-        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
         <hashTree/>
       </hashTree>
       <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Modules" enabled="false">
