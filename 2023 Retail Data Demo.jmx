@@ -389,19 +389,19 @@
         <boolProp name="ignoreFirstLine">true</boolProp>
       </CSVDataSet>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Stores" enabled="false">
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Stores" enabled="true">
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="filename">data/organization.csv</stringProp>
         <boolProp name="quotedData">false</boolProp>
-        <boolProp name="recycle">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
         <stringProp name="shareMode">shareMode.all</stringProp>
-        <boolProp name="stopThread">true</boolProp>
+        <boolProp name="stopThread">false</boolProp>
         <stringProp name="variableNames">store_id,store_name,store_street_address,store_city,store_state,store_zip,store_country,store_phone,store_lat,store_long</stringProp>
         <boolProp name="ignoreFirstLine">true</boolProp>
       </CSVDataSet>
       <hashTree/>
-      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - POS Customers" enabled="true">
+      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - POS Customers" enabled="false">
         <stringProp name="batchSize">16384</stringProp>
         <stringProp name="clientId">CustomerProducer1</stringProp>
         <collectionProp name="extraConfigs">
@@ -438,7 +438,7 @@
         <stringProp name="serializerValue">org.apache.kafka.common.serialization.StringSerializer</stringProp>
       </com.di.jmeter.kafka.config.KafkaProducerConfig>
       <hashTree/>
-      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - POS Transactions" enabled="true">
+      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - POS Transactions" enabled="false">
         <stringProp name="batchSize">16384</stringProp>
         <stringProp name="clientId">POSProducer1</stringProp>
         <collectionProp name="extraConfigs">
@@ -475,7 +475,7 @@
         <stringProp name="serializerValue">org.apache.kafka.common.serialization.StringSerializer</stringProp>
       </com.di.jmeter.kafka.config.KafkaProducerConfig>
       <hashTree/>
-      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - PIM Products" enabled="true">
+      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - PIM Products" enabled="false">
         <stringProp name="batchSize">16384</stringProp>
         <stringProp name="clientId">PIMProducer1</stringProp>
         <collectionProp name="extraConfigs">
@@ -512,7 +512,7 @@
         <stringProp name="serializerValue">org.apache.kafka.common.serialization.StringSerializer</stringProp>
       </com.di.jmeter.kafka.config.KafkaProducerConfig>
       <hashTree/>
-      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - Organization" enabled="true">
+      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - Organization" enabled="false">
         <stringProp name="batchSize">16384</stringProp>
         <stringProp name="clientId">OrganizationProducer1</stringProp>
         <collectionProp name="extraConfigs">
@@ -566,7 +566,7 @@
         <stringProp name="TestPlan.comments">Ask a kTable for some information about a customer</stringProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Event" enabled="true">
           <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
           <stringProp name="cacheKey">false</stringProp>
           <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/events.gs</stringProp>
@@ -586,7 +586,7 @@
         </RandomVariableConfig>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing - Email Action - REST" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing - Email Action - REST" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -603,7 +603,7 @@
         <stringProp name="TestPlan.comments">Martech Events</stringProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Event" enabled="true">
           <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
           <stringProp name="cacheKey">false</stringProp>
           <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/events.gs</stringProp>
@@ -797,7 +797,7 @@ try {
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
 	  &quot;Cookie&quot;: &quot;&quot;,&#xd;
-	  &quot;Type&quot;:&quot;${mockValues.eventType}&quot;,&#xd;
+	  &quot;EventType&quot;:&quot;${mockValues.eventType}&quot;,&#xd;
 	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
 	  &quot;Email&quot;: &quot;${email}&quot;,&#xd;
@@ -884,7 +884,7 @@ try {
         <stringProp name="TestPlan.comments">eCommerce and browsing clickstream</stringProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Event" enabled="true">
           <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
           <stringProp name="cacheKey">false</stringProp>
           <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/events.gs</stringProp>
@@ -921,7 +921,7 @@ try {
           <stringProp name="variableName">browseCount</stringProp>
           <stringProp name="outputFormat"></stringProp>
           <stringProp name="minimumValue">1</stringProp>
-          <stringProp name="maximumValue">4</stringProp>
+          <stringProp name="maximumValue">5</stringProp>
           <stringProp name="randomSeed"></stringProp>
           <boolProp name="perThread">true</boolProp>
         </RandomVariableConfig>
@@ -959,7 +959,7 @@ try {
           <stringProp name="TestPlan.comments">Number of pages this fake user has viewed anonymously</stringProp>
         </LoopController>
         <hashTree>
-          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values - New Action" enabled="true">
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Event - New Action" enabled="true">
             <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
             <stringProp name="cacheKey">false</stringProp>
             <stringProp name="filename"></stringProp>
@@ -972,7 +972,7 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
             <stringProp name="scriptLanguage">groovy</stringProp>
           </JSR223Sampler>
           <hashTree>
-            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="false">
               <collectionProp name="UserParameters.names">
                 <stringProp name="96619420">email</stringProp>
               </collectionProp>
@@ -1002,7 +1002,7 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
 	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
-	  &quot;Type&quot;:&quot;categoryBrowsed&quot;,&#xd;
+	  &quot;EventType&quot;:&quot;categoryBrowsed&quot;,&#xd;
 	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
 	  &quot;Email&quot;: &quot;&quot;,&#xd;
@@ -1235,7 +1235,7 @@ try {
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
 	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
-	  &quot;Type&quot;:&quot;onsiteSearch&quot;,&#xd;
+	  &quot;EventType&quot;:&quot;onsiteSearch&quot;,&#xd;
 	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
 	  &quot;Email&quot;: &quot;&quot;,&#xd;
@@ -1288,15 +1288,10 @@ try {
             </hashTree>
           </hashTree>
         </hashTree>
-        <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
-          <stringProp name="ConstantTimer.delay">300</stringProp>
-          <stringProp name="RandomTimer.range">2000</stringProp>
-        </GaussianRandomTimer>
-        <hashTree/>
         <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Purchase Event" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
-          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <intProp name="ThroughputController.maxThroughput">100</intProp>
           <FloatProperty>
             <name>ThroughputController.percentThroughput</name>
             <value>10.0</value>
@@ -1305,7 +1300,7 @@ try {
           <stringProp name="TestPlan.comments">Now the customer has filled in some data; unite their anonymous cookie with customer data!</stringProp>
         </ThroughputController>
         <hashTree>
-          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Transaction" enabled="true">
             <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
             <stringProp name="cacheKey">false</stringProp>
             <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/transaction.gs</stringProp>
@@ -1331,13 +1326,13 @@ try {
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
 	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
-	  &quot;Type&quot;:&quot;checkout&quot;,&#xd;
+	  &quot;EventType&quot;:&quot;checkout&quot;,&#xd;
 	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
 	  &quot;Email&quot;: &quot;${email}&quot;,&#xd;
 	  &quot;Referer&quot;: &quot;&quot;,&#xd;
 	  &quot;URL&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,&#xd;
+	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,&#xd;
 	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
 	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
 	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
@@ -1345,8 +1340,8 @@ try {
 	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,&#xd;
 	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
 	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,&#xd;
-	  &quot;OperatingSystem&quot;: &quot;${mockValues.OS}&quot;,&#xd;
-	  &quot;Browser&quot;: &quot;${mockValues.browser}&quot;&#xd;
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,&#xd;
+	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;&#xd;
     }&#xd;
   }&#xd;
 }</stringProp>
@@ -1385,6 +1380,74 @@ try {
               <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
               <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
             </GaussianRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream Checkout" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;ssid_web1_${cookie}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
+	  &quot;EventType&quot;:&quot;checkout&quot;,&#xd;
+	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
+	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
+	  &quot;Email&quot;: &quot;&quot;,&#xd;
+	  &quot;Referer&quot;: &quot;&quot;,&#xd;
+	  &quot;URL&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,&#xd;
+	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SearchTerm&quot;: &quot;&quot;,&#xd;
+	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
+	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,&#xd;
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,&#xd;
+	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/ecommerce.clickstream/records</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+            </ResponseAssertion>
             <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream Address Data" enabled="true">
@@ -1539,20 +1602,20 @@ try {
   &quot;partition_id&quot;: null,
   &quot;headers&quot;: [],
   &quot;key&quot;: {
-    &quot;type&quot;: &quot;BINARY&quot;,
-    &quot;data&quot;: &quot;ssid_web1_${cookie}&quot;
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;
   },
   &quot;value&quot;: {
     &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: {
 	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,
-	  &quot;Type&quot;:&quot;checkout&quot;,
+	  &quot;EventType&quot;:&quot;checkout&quot;,
 	  &quot;Subtype&quot;: &quot;&quot;,
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
 	  &quot;Email&quot;: &quot;${email}&quot;,
 	  &quot;Referer&quot;: &quot;&quot;,
 	  &quot;URL&quot;: &quot;&quot;,
-	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${__Random(100000,999999,accountId)}&quot;,
+	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,
 	  &quot;SourceMessageNumber&quot;: &quot;&quot;,
 	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
 	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,
@@ -1989,24 +2052,9 @@ try {
             </JSR223PostProcessor>
             <hashTree/>
           </hashTree>
-          <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
-            <stringProp name="ConstantTimer.delay">300</stringProp>
-            <stringProp name="RandomTimer.range">2000</stringProp>
-          </GaussianRandomTimer>
-          <hashTree/>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Purchase Transaction" enabled="true">
-            <intProp name="ThroughputController.style">1</intProp>
-            <boolProp name="ThroughputController.perThread">false</boolProp>
-            <intProp name="ThroughputController.maxThroughput">1</intProp>
-            <FloatProperty>
-              <name>ThroughputController.percentThroughput</name>
-              <value>10.0</value>
-              <savedValue>0.0</savedValue>
-            </FloatProperty>
-            <stringProp name="TestPlan.comments">Limited to a percentage of total customer leads</stringProp>
-          </ThroughputController>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Purchase Transaction" enabled="true"/>
           <hashTree>
-            <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txOrg" enabled="true">
+            <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txOrg" enabled="false">
               <stringProp name="TestPlan.comments">Pick random store; 85 in total</stringProp>
               <stringProp name="variableName">txOrg</stringProp>
               <stringProp name="outputFormat"></stringProp>
@@ -2016,7 +2064,7 @@ try {
               <boolProp name="perThread">true</boolProp>
             </RandomVariableConfig>
             <hashTree/>
-            <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txCount" enabled="true">
+            <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txCount" enabled="false">
               <stringProp name="TestPlan.comments">Number of items in this transaction</stringProp>
               <stringProp name="variableName">txCount</stringProp>
               <stringProp name="outputFormat"></stringProp>
@@ -2026,7 +2074,7 @@ try {
               <boolProp name="perThread">true</boolProp>
             </RandomVariableConfig>
             <hashTree/>
-            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Transaction" enabled="false">
               <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
               <stringProp name="cacheKey">false</stringProp>
               <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/transaction.gs</stringProp>
@@ -2057,7 +2105,7 @@ try {
       &quot;Currency&quot;: &quot;USD&quot;,&#xd;
       &quot;Discount&quot;: &quot;&quot;,&#xd;
       &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,&#xd;
-      &quot;Type&quot;: &quot;Purchase&quot;,&#xd;
+      &quot;EventType&quot;: &quot;Purchase&quot;,&#xd;
       &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
       &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;&#xd;
     }&#xd;
@@ -2141,7 +2189,7 @@ without actual network activity. This helps debugging tests.</stringProp>
               <stringProp name="LoopController.loops">${txCount}</stringProp>
             </LoopController>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Customer - Transaction" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Customer - Transaction Item" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -2160,7 +2208,7 @@ without actual network activity. This helps debugging tests.</stringProp>
       &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,&#xd;
       &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,&#xd;
       &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,&#xd;
-      &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,&#xd;
+      &quot;TransactionType&quot;: &quot;${__RandomString(1,DCSR)}&quot;,&#xd;
       &quot;Subtype&quot;: &quot;Purchase&quot;,&#xd;
       &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,&#xd;
       &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,&#xd;
@@ -2273,21 +2321,21 @@ without actual network activity. This helps debugging tests.</stringProp>
               </kg.apc.jmeter.samplers.DummySampler>
               <hashTree/>
             </hashTree>
-            <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
-              <stringProp name="ConstantTimer.delay">300</stringProp>
-              <stringProp name="RandomTimer.range">2000</stringProp>
-            </GaussianRandomTimer>
-            <hashTree/>
           </hashTree>
         </hashTree>
+        <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">300</stringProp>
+          <stringProp name="RandomTimer.range">2000</stringProp>
+        </GaussianRandomTimer>
+        <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Customers &amp; Purchases" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Customers &amp; Purchases" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">5</stringProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">0</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
@@ -2552,7 +2600,7 @@ without actual network activity. This helps debugging tests.</stringProp>
             <boolProp name="perThread">true</boolProp>
           </RandomVariableConfig>
           <hashTree/>
-          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Transaction" enabled="true">
             <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
             <stringProp name="cacheKey">false</stringProp>
             <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/transaction.gs</stringProp>
@@ -2573,7 +2621,7 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;Currency&quot;: &quot;USD&quot;,
   &quot;Discount&quot;: &quot;&quot;,
   &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
-  &quot;Type&quot;: &quot;Purchase&quot;,
+  &quot;TransactionType&quot;: &quot;Purchase&quot;,
   &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
   &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
 }</stringProp>
@@ -2592,7 +2640,7 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;Currency&quot;: &quot;USD&quot;,
   &quot;Discount&quot;: &quot;&quot;,
   &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
-  &quot;Type&quot;: &quot;Purchase&quot;,
+  &quot;TransactionType&quot;: &quot;Purchase&quot;,
   &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
   &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
 }</stringProp>
@@ -2619,7 +2667,7 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
   &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
   &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
-  &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
+  &quot;TransactionType&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
   &quot;Subtype&quot;: &quot;Purchase&quot;,
   &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
   &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
@@ -2653,7 +2701,7 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
   &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
   &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
-  &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
+  &quot;TransactionType&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
   &quot;Subtype&quot;: &quot;Purchase&quot;,
   &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
   &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
@@ -2692,7 +2740,7 @@ without actual network activity. This helps debugging tests.</stringProp>
         </GaussianRandomTimer>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Anon Purchases" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Anon Purchases" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -2727,7 +2775,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <boolProp name="perThread">true</boolProp>
         </RandomVariableConfig>
         <hashTree/>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Transaction" enabled="true">
           <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
           <stringProp name="cacheKey">false</stringProp>
           <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/transaction.gs</stringProp>
@@ -2735,31 +2783,6 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="script"></stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223Sampler>
-        <hashTree/>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - Transaction Sampler" enabled="false">
-          <boolProp name="WAITING">false</boolProp>
-          <boolProp name="SUCCESFULL">true</boolProp>
-          <stringProp name="RESPONSE_CODE">200</stringProp>
-          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
-          <stringProp name="REQUEST_DATA">{
-  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
-  &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
-  &quot;Currency&quot;: &quot;USD&quot;,
-  &quot;Discount&quot;: &quot;&quot;,
-  &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
-  &quot;Type&quot;: &quot;Purchase&quot;,
-  &quot;TransactionTimeStamp&quot;: &quot;${txDate} ${txTime}&quot;,
-  &quot;SourceCustomerNumber&quot;: &quot;&quot;
-}</stringProp>
-          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
-without actual network activity. This helps debugging tests.</stringProp>
-          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
-          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
-          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
-          <stringProp name="URL"></stringProp>
-          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
-        </kg.apc.jmeter.samplers.DummySampler>
         <hashTree/>
         <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - Transaction" enabled="true">
           <stringProp name="kafkaProducerClientVariableName">KafkaTransactionsProducerClient</stringProp>
@@ -2773,18 +2796,77 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;Currency&quot;: &quot;USD&quot;,
   &quot;Discount&quot;: &quot;&quot;,
   &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
-  &quot;Type&quot;: &quot;Purchase&quot;,
+  &quot;TransactionType&quot;: &quot;Purchase&quot;,
   &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
   &quot;SourceCustomerNumber&quot;: &quot;&quot;
 }</stringProp>
           <collectionProp name="messageHeaders"/>
         </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
         <hashTree/>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - Transaction Sampler" enabled="false">
+          <boolProp name="WAITING">false</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">{
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
+  &quot;TransactionType&quot;: &quot;Purchase&quot;,
+  &quot;TransactionTimeStamp&quot;: &quot;${txDate} ${txTime}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;&quot;
+}</stringProp>
+          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree/>
         <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Transaction Items" enabled="true">
           <boolProp name="LoopController.continue_forever">true</boolProp>
           <stringProp name="LoopController.loops">${txCount}</stringProp>
         </LoopController>
         <hashTree>
+          <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - Transaction Item" enabled="true">
+            <stringProp name="kafkaProducerClientVariableName">KafkaTransactionsProducerClient</stringProp>
+            <stringProp name="kafkaTopic">retail.pos.transaction.item</stringProp>
+            <stringProp name="partitionString"></stringProp>
+            <stringProp name="kafkaMessageKey">${txId}</stringProp>
+            <stringProp name="kafkaMessage">{
+  &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;TransactionType&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
+  &quot;Subtype&quot;: &quot;Purchase&quot;,
+  &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
+  &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;ListPrice&quot;: &quot;${mockValues.txPricePerItem}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;SaleRevenue&quot;: &quot;${mockValues.txRevenuePerItem}&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;CostBasis&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTaxPerItem}&quot;,
+  &quot;ShipDate&quot;: &quot;&quot;,  
+  &quot;ShippingRevenue&quot;: &quot;&quot;,
+  &quot;ShippingCost&quot;: &quot;&quot;,
+  &quot;ShippingDiscount&quot;: &quot;&quot;,
+  &quot;OtherRevenue&quot;: &quot;&quot;,
+  &quot;OtherCosts&quot;: &quot;&quot;,
+  &quot;DateCreated&quot;: &quot;${txDate}&quot;,
+  &quot;Gift&quot;: &quot;${__RandomString(1,YN)}&quot;
+}</stringProp>
+            <collectionProp name="messageHeaders"/>
+          </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+          <hashTree/>
           <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - Transaction Item Sampler" enabled="false">
             <boolProp name="WAITING">false</boolProp>
             <boolProp name="SUCCESFULL">true</boolProp>
@@ -2794,7 +2876,7 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
   &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
   &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
-  &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
+  &quot;TransactionType&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
   &quot;Subtype&quot;: &quot;Purchase&quot;,
   &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
   &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
@@ -2825,40 +2907,6 @@ without actual network activity. This helps debugging tests.</stringProp>
             <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
           </kg.apc.jmeter.samplers.DummySampler>
           <hashTree/>
-          <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - Transaction Item" enabled="true">
-            <stringProp name="kafkaProducerClientVariableName">KafkaTransactionsProducerClient</stringProp>
-            <stringProp name="kafkaTopic">retail.pos.transaction.item</stringProp>
-            <stringProp name="partitionString"></stringProp>
-            <stringProp name="kafkaMessageKey">${txId}</stringProp>
-            <stringProp name="kafkaMessage">{
-  &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
-  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
-  &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
-  &quot;Subtype&quot;: &quot;Purchase&quot;,
-  &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
-  &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
-  &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
-  &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
-  &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
-  &quot;ListPrice&quot;: &quot;${mockValues.txPricePerItem}&quot;,
-  &quot;Currency&quot;: &quot;USD&quot;,
-  &quot;SaleRevenue&quot;: &quot;${mockValues.txRevenuePerItem}&quot;,
-  &quot;Discount&quot;: &quot;&quot;,
-  &quot;CostBasis&quot;: &quot;&quot;,
-  &quot;Tax&quot;: &quot;${mockValues.txTaxPerItem}&quot;,
-  &quot;ShipDate&quot;: &quot;&quot;,  
-  &quot;ShippingRevenue&quot;: &quot;&quot;,
-  &quot;ShippingCost&quot;: &quot;&quot;,
-  &quot;ShippingDiscount&quot;: &quot;&quot;,
-  &quot;OtherRevenue&quot;: &quot;&quot;,
-  &quot;OtherCosts&quot;: &quot;&quot;,
-  &quot;DateCreated&quot;: &quot;${txDate}&quot;,
-  &quot;Gift&quot;: &quot;${__RandomString(1,YN)}&quot;
-}</stringProp>
-            <collectionProp name="messageHeaders"/>
-          </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
-          <hashTree/>
         </hashTree>
         <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
           <stringProp name="ConstantTimer.delay">300</stringProp>
@@ -2882,7 +2930,7 @@ without actual network activity. This helps debugging tests.</stringProp>
         <stringProp name="TestPlan.comments">Create products list acting as a PIM client</stringProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Product Values" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Product" enabled="true">
           <stringProp name="TestPlan.comments">Create random categories and values to populate products and prices with discounts that can match with our clickstream later.</stringProp>
           <stringProp name="cacheKey">true</stringProp>
           <stringProp name="filename">functions/product.gs</stringProp>
@@ -2906,7 +2954,7 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;Availability&quot;: &quot;${mockValues.productAvail}&quot;,
   &quot;AvailableQty&quot;: &quot;${__Random(1,85,)}&quot;,
   &quot;RecoStatus&quot;: &quot;${__RandomString(1,YN)}&quot;,
-  &quot;Size&quot;: &quot;${__RandomString(1,SML)}&quot;,
+  &quot;ProductSize&quot;: &quot;${__RandomString(1,SML)}&quot;,
   &quot;Color&quot;: &quot;${mockValues.productColor}&quot;,
   &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,49,)}&quot;,
   &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
@@ -2930,7 +2978,7 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;Availability&quot;: &quot;${mockValues.productAvail}&quot;,
   &quot;AvailableQty&quot;: &quot;${__Random(1,85,)}&quot;,
   &quot;RecoStatus&quot;: &quot;${__RandomString(1,YN)}&quot;,
-  &quot;Size&quot;: &quot;${__RandomString(1,SML)}&quot;,
+  &quot;ProductSize&quot;: &quot;${__RandomString(1,SML)}&quot;,
   &quot;Color&quot;: &quot;${mockValues.productColor}&quot;,
   &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,
   &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
@@ -2977,16 +3025,15 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="LoopController.loops">85</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
-        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
         <stringProp name="TestPlan.comments">&quot;Organization&quot; in the data model</stringProp>
       </ThreadGroup>
       <hashTree>
-        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Organization - Record" enabled="false">
+        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Organization - Record" enabled="true">
           <stringProp name="kafkaProducerClientVariableName">KafkaOrganizationProducerClient</stringProp>
           <stringProp name="kafkaTopic">retail.organizations</stringProp>
           <stringProp name="partitionString"></stringProp>
@@ -2995,7 +3042,7 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;SourceOrganizationNumber&quot;: &quot;SON-${store_id}&quot;,
   &quot;Name&quot;: &quot;${store_name}&quot;,
   &quot;Status&quot;: &quot;Open&quot;,
-  &quot;Type&quot;: &quot;${__RandomString(1,DPWO)}&quot;,
+  &quot;OrganizationType&quot;: &quot;${__RandomString(1,DPWO)}&quot;,
   &quot;Country&quot;: &quot;US&quot;,
   &quot;State&quot;: &quot;${store_state}&quot;,
   &quot;City&quot;: &quot;${store_city}&quot;,

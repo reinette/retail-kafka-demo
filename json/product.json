@@ -8,9 +8,9 @@
   "Availability": "${mockValues.productAvail}",
   "AvailableQty": "${__Random(1,85,)}",
   "RecoStatus": "${__RandomString(1,YN)}",
-  "Size": "${__RandomString(1,SML)}",
+  "ProductSize": "${__RandomString(1,SML)}",
   "Color": "${mockValues.productColor}",
   "SourceProductCategoryNumber": "${__Random(1,49,)}",
   "DateCreated": "${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}",
-  "Custom attributes": ""
+  "CustomAttributes": ""
 }

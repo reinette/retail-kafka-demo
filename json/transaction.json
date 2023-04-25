@@ -5,7 +5,7 @@
   "Currency": "USD",
   "Discount": "",
   "Tax": "${mockValues.txTax}",
-  "Type": "Purchase",
+  "TransactionType": "Purchase",
   "TransactionTimeStamp": "${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}",
   "SourceCustomerNumber": "SCN-${accountId}"
 }

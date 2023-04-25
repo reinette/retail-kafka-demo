@@ -2,7 +2,7 @@
   "SourceTransactionItemNumber": "STIN-${__Random(1000000,9999999,)}",
   "SourceTransactionNumber": "STN-${txId}",
   "SourceOrganizationNumber": "SON-${txOrg}",
-  "Type": "${__RandomString(1,DCSR)}",
+  "TransactionType": "${__RandomString(1,DCSR)}",
   "Subtype": "Purchase",
   "InvoiceDate": "${txDate}",
   "SourceProductNumber": "SCN-${product_id}",

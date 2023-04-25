@@ -2,7 +2,7 @@
   "SourceOrganizationNumber": "SON-${store_id}",
   "Name": "${store_name}",
   "Status": "Open",
-  "Type": "${__RandomString(1,DPWO)}",
+  "OrganizationType": "${__RandomString(1,DPWO)}",
   "Country": "US",
   "State": "${store_state}",
   "City": "${store_city}",
