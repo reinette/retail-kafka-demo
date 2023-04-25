@@ -1,0 +1,86 @@
+store_id,store_name,store_street_address,store_city,store_state,store_zip,store_country,store_phone,store_lat,store_long
+1,Anchorage Store,7405 Debarr Road,Anchorage,AK,99504,US,907-339-9039,61.211988,-149.743184
+2,Kenai Store,10096 Kenai Spur Hwy,Kenai,AK,99611,US,907-395-0971,60.564195,-151.225131
+3,Tuscaloosa Store,1501 Skyland Blvd E,Tuscaloosa,AL,35405,US,205-750-0823,33.165251,-87.518548
+4,Batesville Store,3150 Harrison St,Batesville,AR,72501,US,870-793-9004,35.762696,-91.614278
+5,Safford Store,755 S 20th Ave,Safford,AZ,85546,US,928-428-7990,32.832703,-109.730199
+6,Escondido Store,1330 East Grand Avenue,Escondido,CA,92027,US,760-871-6622,33.130137,-117.062977
+7,Sacramento Neighborhood Market,4420 Florin Rd,Sacramento,CA,95823,US,916-533-0942,38.494354,-121.454151
+8,Pueblo Store,4200 Dillon Dr,Pueblo,CO,81008,US,719-545-6404,38.313974,-104.60963
+9,Manchester Store,420 Buckland Hills Dr,Manchester,CT,6042,US,860-644-5100,41.806569,-72.537633
+10,Washington Store,310 Riggs Road Ne,Washington,DC,20011,US,202-756-4418,38.957531,-77.002461
+11,Dover Store,36 Jerome Drive,Dover,DE,19901,US,302-674-2159,39.216724,-75.570866
+12,Winter Garden Store,16313 New Independence Parkway,Winter Garden,FL,34787,US,407-554-0182,28.476488,-81.629452
+13,Cocoa Store,2700 Clearlake Rd,Cocoa,FL,32922,US,321-639-1610,28.395378,-80.753116
+14,Quincy Store,1940 Pat Thomas Pkwy,Quincy,FL,32351,US,850-875-1661,30.556986,-84.595535
+15,Sylvester Store,1102 E Franklin,Sylvester,GA,31791,US,229-463-6004,31.5257909,-83.8117412
+16,Cochran Store,366 Hwy 26 East,Cochran,GA,31014,US,478-934-4919,32.400301,-83.336257
+17,Grovetown Neighborhood Market,5303-a Wrightsboro Rd,Grovetown,GA,30813,US,762-383-6528,33.455443,-82.207958
+18,Mililani Store,95-550 Lanikuhana Ave,Mililani,HI,96789,US,808-623-6744,21.450001,-158.00557
+19,Pearl City Store,1131 Kuala St,Pearl City,HI,96782,US,808-454-8785,21.397174,-157.974452
+20,Muscatine Store,3003 N Highway 61,Muscatine,IA,52761,US,563-263-8312,41.457702,-91.025199
+21,Marshalltown Store,2802 S Center St,Marshalltown,IA,50158,US,641-753-7846,42.012119,-92.908946
+22,Anamosa Store,101 115th St,Anamosa,IA,52205,US,319-462-4311,42.099218,-91.264296
+23,Boise Store,8300 W Overland Rd,Boise,ID,83709,US,208-321-9077,43.592826,-116.284808
+24,Fort Wayne Store,10105 Lima Rd,Fort Wayne,IN,46818,US,260-490-6510,41.176255,-85.169186
+25,Coffeyville Store,1863 Cr 5300,Coffeyville,KS,67337,US,620-251-4113,37.042359,-95.579038
+26,Junction City Store,521 E Chestnut St,Junction City,KS,66441,US,785-238-8229,39.018965,-96.820674
+27,Pittsburg Store,2710 N Broadway St,Pittsburg,KS,66762,US,620-232-1593,37.433957,-94.702301
+28,Louisville Store,2020 Bashford Manor Ln,Louisville,KY,40218,US,502-451-6766,38.199176,-85.667473
+29,Louisville Store,4840 Outer Loop,Louisville,KY,40219,US,502-313-6351,38.135649,-85.671851
+30,Morgan City Store,973 Highway 90 E,Morgan City,LA,70380,US,985-395-2094,29.683712,-91.267157
+31,Hanover Store,1775 Washington St,Hanover,MA,2339,US,781-826-0606,42.147708,-70.84266
+32,Raynham Store,160 Broadway,Raynham,MA,2767,US,508-692-6046,41.935116,-71.08582
+33,Hagerstown Store,17850 Garland Groh Blvd,Hagerstown,MD,21740,US,301-714-1373,39.658092,-77.74905
+34,Prince Frederick Store,150 Solomons Island Rd N,Prince Frederick,MD,20678,US,410-535-3790,38.540822,-76.591415
+35,Falmouth Store,206 Us Rt 1,Falmouth,ME,4105,US,207-781-3879,43.720249,-70.235287
+36,Mexico Store,258 River Rd,Mexico,ME,4257,US,207-364-2557,44.538526,-70.516879
+37,Brewer Store,24 Walton Dr,Brewer,ME,4412,US,207-989-5068,44.774335,-68.732304
+38,Saint Johns Store,1165 Superior Dr,Saint Johns,MI,48879,US,989-224-8099,42.978689,-84.538647
+39,Alma Store,7700 N Alger Rd,Alma,MI,48801,US,989-463-6770,43.4034976,-84.6641673
+40,Cadillac Store,8917 E 34 Rd,Cadillac,MI,49601,US,231-775-8778,44.284128,-85.3986136
+41,Brooklyn Center Store,1200 Shingle Creek Crossing,Brooklyn Center,MN,55430,US,763-354-1941,45.0563683,-93.3162617
+42,Blaine Store,11505 Ulysses St Ne,Blaine,MN,55434,US,763-354-1979,45.1797455,-93.2390135
+43,Carthage Store,2705 Grand Ave,Carthage,MO,64836,US,417-358-3000,37.141958,-94.313292
+44,Byram Store,131 Handley Boulevard,Byram,MS,39272,US,769-237-4314,32.185505,-90.264498
+45,Biloxi Neighborhood Market,2050 Pass Road,Biloxi,MS,39531,US,228-271-6723,30.403829,-88.958552
+46,Horn Lake Store,4150 Goodman Road West,Horn Lake,MS,38637,US,662-253-6184,34.964734,-90.063157
+47,Helena Store,2750 Prospect Ave,Helena,MT,59601,US,406-443-3220,46.593512,-111.990661
+48,Mooresville Store,169 Norman Station Blvd,Mooresville,NC,28117,US,704-664-5238,35.589556,-80.855035
+49,Hillsborough Store,501 Hampton Pointe B,Hillsborough,NC,27278,US,919-732-9172,36.056242,-79.085802
+50,Bottineau Store,912 11th St E,Bottineau,ND,58318,US,701-228-5276,48.8185472,-100.4324835
+51,Grand Forks Store,5755 Gateway Drive,Grand Forks,ND,58203,US,701-620-6003,47.930327,-97.113369
+52,York Store,101 E David Dr,York,NE,68467,US,402-362-3366,40.82787,-97.593326
+53,Fairbury Store,2831 Highway 15,Fairbury,NE,68352,US,402-729-3394,40.162702,-97.175372
+54,Kearney Store,5411 2nd Ave,Kearney,NE,68847,US,308-234-8448,40.726452,-99.081096
+55,Epping Store,35 Fresh River Rd,Epping,NH,3042,US,603-679-5919,43.027448,-71.068055
+56,Keene Store,350 Winchester St,Keene,NH,3431,US,603-357-7200,42.924172,-72.286498
+57,Woodsville Store,4901 Dartmouth College Hwy,Woodsville,NH,3785,US,603-747-8250,44.140637,-72.026407
+58,Turnersville Store,3501 Route 42,Turnersville,NJ,8012,US,856-629-3888,39.729508,-75.035783
+59,Las Cruces Neighborhood Market,150 N Sonoma Ranch Blvd,Las Cruces,NM,88001,US,575-323-6098,32.328121,-106.721759
+60,Las Vegas Store,6005 S Eastern Ave,Las Vegas,NV,89119,US,702-451-8900,36.080571,-115.122253
+61,Lowville Store,7155 E State St # 12south,Lowville,NY,13367,US,315-376-7030,43.7736414,-75.478088
+62,Johnson City Store,2 Gannett Dr,Johnson City,NY,13790,US,607-240-5040,42.115453,-75.946979
+63,Urbana Store,1840 E Us Highway 36,Urbana,OH,43078,US,937-653-5313,40.108516,-83.715962
+64,Norman Neighborhood Market,2551 Classen Blvd,Norman,OK,73071,US,405-515-7418,35.193337,-97.422127
+65,Oklahoma City Store,3301 Sw 104th Street,Oklahoma City,OK,73159,US,405-300-6584,35.365591,-97.576797
+66,Klamath Falls Store,3600 Washburn Way,Klamath Falls,OR,97603,US,541-885-6890,42.193388,-121.760604
+67,Lebanon Store,3290 S Santiam Hwy,Lebanon,OR,97355,US,541-258-7400,44.516753,-122.900683
+68,Camp Hill Store,3400 Hartzdale Drive,Camp Hill,PA,17011,US,717-409-3102,40.224885,-76.928412
+69,Philadelphia Store,2200 Wheatsheaf Ln,Philadelphia,PA,19137,US,215-613-2236,39.999062,-75.091761
+70,Fajardo Store,150 Carr 940 Ste 180,Fajardo,PR,738,PR,787-860-1020,18.34303,-65.674169
+71,Providence Store,51 Silver Spring St,Providence,RI,2904,US,401-272-5047,41.845607,-71.416056
+72,Sumter Neighborhood Market,343 Pinewood Rd,Sumter,SC,29150,US,803-305-6238,33.906164,-80.378092
+73,Sioux Falls Store,5200 West 60th Street North,Sioux Falls,SD,57107,US,605-906-6078,43.603247,-96.789691
+74,Brownsville Store,1100 S Dupree Ave,Brownsville,TN,38012,US,731-772-9551,35.5867,-89.238093
+75,Dallas Store,15757 Coit Rd,Dallas,TX,75248,US,972-235-0681,32.963412,-96.770294
+76,Cedar City Store,1330 S Providence Center Dr,Cedar City,UT,84720,US,435-586-0172,37.65447,-113.088367
+77,Tooele Store,99 W 1280 N,Tooele,UT,84074,US,435-882-0180,40.555998,-112.30067
+78,Murray Pickup only,5596 S Van Winkle Expy,Murray,UT,84117,US,801-278-8290,40.649827,-111.849349
+79,Abingdon Store,16032 Fifteen Mile Boulevard,Abingdon,VA,24211,US,276-619-4843,36.714643,-81.927722
+80,Derby Store,115 Seymour Drive,Derby,VT,5829,US,802-624-8012,44.949783,-72.171052
+81,Pullman Store,1690 Se Harvest Dr,Pullman,WA,99163,US,509-334-2990,46.712044,-117.175627
+82,Omak Store,902 Engh Rd,Omak,WA,98841,US,509-826-6002,48.4139887,-119.5078293
+83,Bellevue Store,12620 Se 41st Pl,Bellevue,WA,98006,US,425-201-7543,47.572888,-122.172531
+84,Monroe Store,300 6th Ave West,Monroe,WI,53566,US,608-325-7701,42.6095957,-89.6635797
+85,Dodgeville Store,601 E Leffler St,Dodgeville,WI,53533,US,608-935-2723,42.973808,-90.119979

@@ -1,0 +1,42 @@
+{
+  "partition_id": null,
+  "headers": [],
+  "key": {
+    "type": "JSON",
+    "data": "${__Random(100000,999999,addressId)}"
+  },
+  "value": {
+    "type": "JSON",
+    "data": {
+      "SourceAddressNumber": "SAN-${addressId}",
+      "AddressType":"${__RandomString(1,HWU)}",
+      "Address1": "${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}", 
+      "Address2": "",
+      "City": "${__changeCase(${__V(${city})},CAPITALIZE,)}",
+      "Zip": "${zip}",
+      "ZipExt": "",
+      "State": "${state}",
+      "Country": "United States",
+      "CountryCode": "US",
+      "CarrierRoute": "",
+      "Certified": "",
+      "CMRA": "",
+      "DateCertified": "",
+      "DeleteFlag": "N",
+      "DeliveryPointCheckDigit": "",
+      "DeliveryPointCode": "",
+      "DpvConfirm": "",
+      "ErrorCode": "",
+      "ErrorString": "",
+      "LACS": "",
+      "Latitude": "",
+      "Longitude": "",
+      "MatchFlag": "",
+      "MoveDate": "",
+      "MoveType": "",
+      "NCOADateModified": "",
+      "NCOADateUpdate": "",
+      "RBDI": ""
+    }
+  }
+}

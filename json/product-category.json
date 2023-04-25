@@ -1,0 +1,14 @@
+{
+  "SourceCategoryNumber": {
+    "value": "${__Random(1,49,)}"
+  },
+  "Name": {
+    "value": ""
+  },
+  "SourceParentCategoryNumber": {
+    "value": "${__Random(1,49,)}"
+  },
+  "DateCreated": {
+    "value": "${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}"
+  }
+}

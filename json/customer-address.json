@@ -1,0 +1,4 @@
+{
+  "SourceAddressNumber": "SAN-${addressId}",
+  "SourceCustomerNumber": "SCN-${accountId}"
+}

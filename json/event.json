@@ -1,0 +1,30 @@
+{
+  "partition_id": null,
+  "headers": [],
+  "key": {
+    "type": "JSON",
+    "data": "ssid_web1_${cookie}"
+  },
+  "value": {
+    "type": "JSON",
+    "data": {
+	  "Cookie": "ssid_web1_${cookie}",
+	  "Type":"${mockValues.eventType}",
+	  "Subtype": "",
+	  "EventTimeStamp": "${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}",
+	  "Email": "${email}",
+	  "Referer": "",
+	  "URL": "",
+	  "SourceCustomerNumber": "SCN-${__Random(100000,999999,accountId)}",
+	  "SourceMessageNumber": "",
+	  "SourceProductNumber": "SPN-${product_id}",
+	  "SourceProductCategoryNumber": "SPC-${__Random(1,44,)}",
+	  "SourceTransactionNumber": "",
+	  "SearchTerm": "${searchTerm}",
+	  "UserClient": "",
+	  "DeviceType": "${mockValues.deviceType}",
+	  "OperatingSystem": "${mockValues.osType}",
+	  "Browser": "${mockValues.browserType}"
+    }
+  }
+}

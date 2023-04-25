@@ -1,0 +1,15 @@
+{
+  "SourceOrganizationNumber": "SON-${store_id}",
+  "Name": "${store_name}",
+  "Status": "Open",
+  "Type": "${__RandomString(1,DPWO)}",
+  "Country": "US",
+  "State": "${store_state}",
+  "City": "${store_city}",
+  "Address1": "${store_street_address}",
+  "Address2": "",
+  "Zip": "${store_zip}",
+  "ExcludeAsClosestStore": "N",
+  "Phone": "${store_phone}",
+  "DateCreated": "${__RandomDate(yyyy/MM/dd,2008/08/07,2022/04/20,,)}"
+}

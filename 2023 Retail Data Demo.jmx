@@ -1,0 +1,3291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.5">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Retail Data Demo" enabled="true">
+      <stringProp name="TestPlan.comments">Test produce / consume for a retail demo scenario with clickstream data</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Global Config" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="KAFKA_BROKER" elementType="Argument">
+            <stringProp name="Argument.name">KAFKA_BROKER</stringProp>
+            <stringProp name="Argument.value">pkc-6ojv2.us-west4.gcp.confluent.cloud</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Kafka Broker</stringProp>
+          </elementProp>
+          <elementProp name="CLUSTER_ID" elementType="Argument">
+            <stringProp name="Argument.name">CLUSTER_ID</stringProp>
+            <stringProp name="Argument.value">lkc-128jjz</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="HTTPS" elementType="Argument">
+            <stringProp name="Argument.name">HTTPS</stringProp>
+            <stringProp name="Argument.value">443</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="USER.DELAY" elementType="Argument">
+            <stringProp name="Argument.name">USER.DELAY</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">1s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="USER.OFFSET" elementType="Argument">
+            <stringProp name="Argument.name">USER.OFFSET</stringProp>
+            <stringProp name="Argument.value">500</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">500ms</stringProp>
+          </elementProp>
+          <elementProp name="OFFSET.SHORT" elementType="Argument">
+            <stringProp name="Argument.name">OFFSET.SHORT</stringProp>
+            <stringProp name="Argument.value">100</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">100ms</stringProp>
+          </elementProp>
+          <elementProp name="OFFSET.LONG" elementType="Argument">
+            <stringProp name="Argument.name">OFFSET.LONG</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">1s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="WAIT.SHORT" elementType="Argument">
+            <stringProp name="Argument.name">WAIT.SHORT</stringProp>
+            <stringProp name="Argument.value">5000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">5s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="WAIT.MEDIUM" elementType="Argument">
+            <stringProp name="Argument.name">WAIT.MEDIUM</stringProp>
+            <stringProp name="Argument.value">15000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">15s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="WAIT.LONG" elementType="Argument">
+            <stringProp name="Argument.name">WAIT.LONG</stringProp>
+            <stringProp name="Argument.value">30000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">30s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="THREADS.HIGH" elementType="Argument">
+            <stringProp name="Argument.name">THREADS.HIGH</stringProp>
+            <stringProp name="Argument.value">45</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">50</stringProp>
+          </elementProp>
+          <elementProp name="THREADS.MEDIUM" elementType="Argument">
+            <stringProp name="Argument.name">THREADS.MEDIUM</stringProp>
+            <stringProp name="Argument.value">10</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">25</stringProp>
+          </elementProp>
+          <elementProp name="THREADS.LOW" elementType="Argument">
+            <stringProp name="Argument.name">THREADS.LOW</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">10</stringProp>
+          </elementProp>
+          <elementProp name="THREADS.TEST" elementType="Argument">
+            <stringProp name="Argument.name">THREADS.TEST</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">1</stringProp>
+          </elementProp>
+          <elementProp name="RAMP.SHORT" elementType="Argument">
+            <stringProp name="Argument.name">RAMP.SHORT</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">in seconds</stringProp>
+          </elementProp>
+          <elementProp name="RAMP.MEDIUM" elementType="Argument">
+            <stringProp name="Argument.name">RAMP.MEDIUM</stringProp>
+            <stringProp name="Argument.value">50</stringProp>
+            <stringProp name="Argument.desc">in seconds</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="RAMP.LONG" elementType="Argument">
+            <stringProp name="Argument.name">RAMP.LONG</stringProp>
+            <stringProp name="Argument.value">300</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">in seconds</stringProp>
+          </elementProp>
+        </collectionProp>
+        <stringProp name="TestPlan.comments">Convention note: Constant vars are uppercase, properties lowercase. Vars that change during the test are up to the individual&apos;s conscience.</stringProp>
+      </Arguments>
+      <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Local Config" enabled="false">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="KAFKA_BROKER" elementType="Argument">
+            <stringProp name="Argument.name">KAFKA_BROKER</stringProp>
+            <stringProp name="Argument.value">local</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Kafka Broker</stringProp>
+          </elementProp>
+          <elementProp name="CLUSTER_ID" elementType="Argument">
+            <stringProp name="Argument.name">CLUSTER_ID</stringProp>
+            <stringProp name="Argument.value">local</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="HTTPS" elementType="Argument">
+            <stringProp name="Argument.name">HTTPS</stringProp>
+            <stringProp name="Argument.value">443</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="USER.DELAY" elementType="Argument">
+            <stringProp name="Argument.name">USER.DELAY</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">1s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="USER.OFFSET" elementType="Argument">
+            <stringProp name="Argument.name">USER.OFFSET</stringProp>
+            <stringProp name="Argument.value">500</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">500ms</stringProp>
+          </elementProp>
+          <elementProp name="OFFSET.SHORT" elementType="Argument">
+            <stringProp name="Argument.name">OFFSET.SHORT</stringProp>
+            <stringProp name="Argument.value">100</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">100ms</stringProp>
+          </elementProp>
+          <elementProp name="OFFSET.LONG" elementType="Argument">
+            <stringProp name="Argument.name">OFFSET.LONG</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">1s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="WAIT.SHORT" elementType="Argument">
+            <stringProp name="Argument.name">WAIT.SHORT</stringProp>
+            <stringProp name="Argument.value">5000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">5s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="WAIT.MEDIUM" elementType="Argument">
+            <stringProp name="Argument.name">WAIT.MEDIUM</stringProp>
+            <stringProp name="Argument.value">15000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">15s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="WAIT.LONG" elementType="Argument">
+            <stringProp name="Argument.name">WAIT.LONG</stringProp>
+            <stringProp name="Argument.value">30000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">30s in milliseconds</stringProp>
+          </elementProp>
+          <elementProp name="THREADS.HIGH" elementType="Argument">
+            <stringProp name="Argument.name">THREADS.HIGH</stringProp>
+            <stringProp name="Argument.value">45</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">50</stringProp>
+          </elementProp>
+          <elementProp name="THREADS.MEDIUM" elementType="Argument">
+            <stringProp name="Argument.name">THREADS.MEDIUM</stringProp>
+            <stringProp name="Argument.value">10</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">25</stringProp>
+          </elementProp>
+          <elementProp name="THREADS.LOW" elementType="Argument">
+            <stringProp name="Argument.name">THREADS.LOW</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">10</stringProp>
+          </elementProp>
+          <elementProp name="THREADS.TEST" elementType="Argument">
+            <stringProp name="Argument.name">THREADS.TEST</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">1</stringProp>
+          </elementProp>
+          <elementProp name="RAMP.SHORT" elementType="Argument">
+            <stringProp name="Argument.name">RAMP.SHORT</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">in seconds</stringProp>
+          </elementProp>
+          <elementProp name="RAMP.MEDIUM" elementType="Argument">
+            <stringProp name="Argument.name">RAMP.MEDIUM</stringProp>
+            <stringProp name="Argument.value">50</stringProp>
+            <stringProp name="Argument.desc">in seconds</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="RAMP.LONG" elementType="Argument">
+            <stringProp name="Argument.name">RAMP.LONG</stringProp>
+            <stringProp name="Argument.value">300</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">in seconds</stringProp>
+          </elementProp>
+        </collectionProp>
+        <stringProp name="TestPlan.comments">Convention note: Constant vars are uppercase, properties lowercase. Vars that change during the test are up to the individual&apos;s conscience.</stringProp>
+      </Arguments>
+      <hashTree/>
+      <kg.apc.jmeter.config.VariablesFromCSV guiclass="kg.apc.jmeter.config.VariablesFromCSVGui" testclass="kg.apc.jmeter.config.VariablesFromCSV" testname="Secrets - secrets.csv" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+        <stringProp name="TestPlan.comments">Do not commit this file to your repo :) Provides CC_KEY and CC_SECRET</stringProp>
+        <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/secrets.csv</stringProp>
+        <stringProp name="variablesPrefix"></stringProp>
+        <stringProp name="delimiter">,</stringProp>
+        <intProp name="skipLines">0</intProp>
+        <boolProp name="storeSysProp">false</boolProp>
+      </kg.apc.jmeter.config.VariablesFromCSV>
+      <hashTree/>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager - HTML" enabled="false">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="Accept-Language" elementType="Header">
+            <stringProp name="Header.name">Accept-Language</stringProp>
+            <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+          </elementProp>
+          <elementProp name="Accept-Encoding" elementType="Header">
+            <stringProp name="Header.name">Accept-Encoding</stringProp>
+            <stringProp name="Header.value">gzip, deflate, sdch, br</stringProp>
+          </elementProp>
+          <elementProp name="User-Agent" elementType="Header">
+            <stringProp name="Header.name">User-Agent</stringProp>
+            <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.80 Safari/537.36 </stringProp>
+          </elementProp>
+          <elementProp name="Accept" elementType="Header">
+            <stringProp name="Header.name">Accept</stringProp>
+            <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Connection</stringProp>
+            <stringProp name="Header.value">keep-alive</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager - CC" enabled="true">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Accept</stringProp>
+            <stringProp name="Header.value">*/*</stringProp>
+          </elementProp>
+        </collectionProp>
+        <stringProp name="TestPlan.comments">Kafka Rest Produce JSON Binary</stringProp>
+      </HeaderManager>
+      <hashTree/>
+      <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Basic Auth - CC" enabled="true">
+        <collectionProp name="AuthManager.auth_list">
+          <elementProp name="" elementType="Authorization">
+            <stringProp name="Authorization.url">https://${KAFKA_BROKER}</stringProp>
+            <stringProp name="Authorization.username">${CC_API_KEY}</stringProp>
+            <stringProp name="Authorization.password">${CC_API_SECRET}</stringProp>
+            <stringProp name="Authorization.domain"></stringProp>
+            <stringProp name="Authorization.realm"></stringProp>
+          </elementProp>
+        </collectionProp>
+        <boolProp name="AuthManager.controlledByThreadGroup">false</boolProp>
+        <stringProp name="TestPlan.comments">For Basic Auth</stringProp>
+      </AuthManager>
+      <hashTree/>
+      <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+        <boolProp name="clearEachIteration">true</boolProp>
+        <boolProp name="useExpires">true</boolProp>
+        <stringProp name="TestPlan.comments">Always use this, can live at the top so it applies to all threads.</stringProp>
+        <boolProp name="CacheManager.controlledByThread">false</boolProp>
+      </CacheManager>
+      <hashTree/>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <stringProp name="TestPlan.comments">Always use this, can live at the top so it applies to all threads.</stringProp>
+        <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+        <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+      </CookieManager>
+      <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="false">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">${DOMAIN}</stringProp>
+        <stringProp name="HTTPSampler.port">${PORT}</stringProp>
+        <stringProp name="HTTPSampler.protocol">${PROTOCOL}</stringProp>
+        <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+        <stringProp name="HTTPSampler.path"></stringProp>
+        <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+        <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+        <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+        <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+        <stringProp name="HTTPSampler.response_timeout"></stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Search" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">data/search.csv</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">searchTerm</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Addresses" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">data/addresses-us.csv</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">unumber,address,city,state,zip</stringProp>
+        <boolProp name="ignoreFirstLine">true</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Names - Family" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">data/names-family.csv</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">family</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Names - Given" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">data/names-given.csv</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">given</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Categories" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">data/product-categories.csv</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">state</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Products" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">data/product-list-simplified.csv</stringProp>
+        <boolProp name="quotedData">true</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">product_id,product_name</stringProp>
+        <boolProp name="ignoreFirstLine">true</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Stores" enabled="false">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">data/organization.csv</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">false</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">true</boolProp>
+        <stringProp name="variableNames">store_id,store_name,store_street_address,store_city,store_state,store_zip,store_country,store_phone,store_lat,store_long</stringProp>
+        <boolProp name="ignoreFirstLine">true</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - POS Customers" enabled="true">
+        <stringProp name="batchSize">16384</stringProp>
+        <stringProp name="clientId">CustomerProducer1</stringProp>
+        <collectionProp name="extraConfigs">
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">sasl.jaas.config</stringProp>
+            <stringProp name="configValue">org.apache.kafka.common.security.plain.PlainLoginModule required username=&apos;${CC_KEY}&apos; password=&apos;${CC_SECRET}&apos;;</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">security.protocol</stringProp>
+            <stringProp name="configValue">SASL_SSL</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">sasl.mechanism</stringProp>
+            <stringProp name="configValue">PLAIN</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">client.dns.lookup</stringProp>
+            <stringProp name="configValue">use_all_dns_ips</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">session.timeout.ms</stringProp>
+            <stringProp name="configValue">45000</stringProp>
+          </elementProp>
+        </collectionProp>
+        <stringProp name="kafkaBrokers">${KAFKA_BROKER}:9092</stringProp>
+        <stringProp name="kafkaProducerClientVariableName">KafkaCustomerProducerClient</stringProp>
+        <stringProp name="kafkaSslKeystore"></stringProp>
+        <stringProp name="kafkaSslKeystorePassword"></stringProp>
+        <stringProp name="kafkaSslPrivateKeyPass"></stringProp>
+        <stringProp name="kafkaSslTruststore"></stringProp>
+        <stringProp name="kafkaSslTruststorePassword"></stringProp>
+        <stringProp name="securityType">securityType.sasl_plaintext</stringProp>
+        <stringProp name="serializerKey">org.apache.kafka.common.serialization.StringSerializer</stringProp>
+        <stringProp name="serializerValue">org.apache.kafka.common.serialization.StringSerializer</stringProp>
+      </com.di.jmeter.kafka.config.KafkaProducerConfig>
+      <hashTree/>
+      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - POS Transactions" enabled="true">
+        <stringProp name="batchSize">16384</stringProp>
+        <stringProp name="clientId">POSProducer1</stringProp>
+        <collectionProp name="extraConfigs">
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">sasl.jaas.config</stringProp>
+            <stringProp name="configValue">org.apache.kafka.common.security.plain.PlainLoginModule required username=&apos;${CC_KEY}&apos; password=&apos;${CC_SECRET}&apos;;</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">security.protocol</stringProp>
+            <stringProp name="configValue">SASL_SSL</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">sasl.mechanism</stringProp>
+            <stringProp name="configValue">PLAIN</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">client.dns.lookup</stringProp>
+            <stringProp name="configValue">use_all_dns_ips</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">session.timeout.ms</stringProp>
+            <stringProp name="configValue">45000</stringProp>
+          </elementProp>
+        </collectionProp>
+        <stringProp name="kafkaBrokers">${KAFKA_BROKER}:9092</stringProp>
+        <stringProp name="kafkaProducerClientVariableName">KafkaTransactionsProducerClient</stringProp>
+        <stringProp name="kafkaSslKeystore"></stringProp>
+        <stringProp name="kafkaSslKeystorePassword"></stringProp>
+        <stringProp name="kafkaSslPrivateKeyPass"></stringProp>
+        <stringProp name="kafkaSslTruststore"></stringProp>
+        <stringProp name="kafkaSslTruststorePassword"></stringProp>
+        <stringProp name="securityType">securityType.sasl_plaintext</stringProp>
+        <stringProp name="serializerKey">org.apache.kafka.common.serialization.StringSerializer</stringProp>
+        <stringProp name="serializerValue">org.apache.kafka.common.serialization.StringSerializer</stringProp>
+      </com.di.jmeter.kafka.config.KafkaProducerConfig>
+      <hashTree/>
+      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - PIM Products" enabled="true">
+        <stringProp name="batchSize">16384</stringProp>
+        <stringProp name="clientId">PIMProducer1</stringProp>
+        <collectionProp name="extraConfigs">
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">sasl.jaas.config</stringProp>
+            <stringProp name="configValue">org.apache.kafka.common.security.plain.PlainLoginModule required username=&apos;${CC_KEY}&apos; password=&apos;${CC_SECRET}&apos;;</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">security.protocol</stringProp>
+            <stringProp name="configValue">SASL_SSL</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">sasl.mechanism</stringProp>
+            <stringProp name="configValue">PLAIN</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">client.dns.lookup</stringProp>
+            <stringProp name="configValue">use_all_dns_ips</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">session.timeout.ms</stringProp>
+            <stringProp name="configValue">45000</stringProp>
+          </elementProp>
+        </collectionProp>
+        <stringProp name="kafkaBrokers">${KAFKA_BROKER}:9092</stringProp>
+        <stringProp name="kafkaProducerClientVariableName">KafkaProductProducerClient</stringProp>
+        <stringProp name="kafkaSslKeystore"></stringProp>
+        <stringProp name="kafkaSslKeystorePassword"></stringProp>
+        <stringProp name="kafkaSslPrivateKeyPass"></stringProp>
+        <stringProp name="kafkaSslTruststore"></stringProp>
+        <stringProp name="kafkaSslTruststorePassword"></stringProp>
+        <stringProp name="securityType">securityType.sasl_plaintext</stringProp>
+        <stringProp name="serializerKey">org.apache.kafka.common.serialization.StringSerializer</stringProp>
+        <stringProp name="serializerValue">org.apache.kafka.common.serialization.StringSerializer</stringProp>
+      </com.di.jmeter.kafka.config.KafkaProducerConfig>
+      <hashTree/>
+      <com.di.jmeter.kafka.config.KafkaProducerConfig guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.config.KafkaProducerConfig" testname="Kafka Client Config - Organization" enabled="true">
+        <stringProp name="batchSize">16384</stringProp>
+        <stringProp name="clientId">OrganizationProducer1</stringProp>
+        <collectionProp name="extraConfigs">
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">sasl.jaas.config</stringProp>
+            <stringProp name="configValue">org.apache.kafka.common.security.plain.PlainLoginModule required username=&apos;${CC_KEY}&apos; password=&apos;${CC_SECRET}&apos;;</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">security.protocol</stringProp>
+            <stringProp name="configValue">SASL_SSL</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">sasl.mechanism</stringProp>
+            <stringProp name="configValue">PLAIN</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">client.dns.lookup</stringProp>
+            <stringProp name="configValue">use_all_dns_ips</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="com.di.jmeter.kafka.utils.VariableSettings">
+            <stringProp name="configKey">session.timeout.ms</stringProp>
+            <stringProp name="configValue">45000</stringProp>
+          </elementProp>
+        </collectionProp>
+        <stringProp name="kafkaBrokers">${KAFKA_BROKER}:9092</stringProp>
+        <stringProp name="kafkaProducerClientVariableName">KafkaOrganizationProducerClient</stringProp>
+        <stringProp name="kafkaSslKeystore"></stringProp>
+        <stringProp name="kafkaSslKeystorePassword"></stringProp>
+        <stringProp name="kafkaSslPrivateKeyPass"></stringProp>
+        <stringProp name="kafkaSslTruststore"></stringProp>
+        <stringProp name="kafkaSslTruststorePassword"></stringProp>
+        <stringProp name="securityType">securityType.sasl_plaintext</stringProp>
+        <stringProp name="serializerKey">org.apache.kafka.common.serialization.StringSerializer</stringProp>
+        <stringProp name="serializerValue">org.apache.kafka.common.serialization.StringSerializer</stringProp>
+      </com.di.jmeter.kafka.config.KafkaProducerConfig>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing Data Query - REST" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP.SHORT}</stringProp>
+        <longProp name="ThreadGroup.start_time">1435686326000</longProp>
+        <longProp name="ThreadGroup.end_time">1435686326000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="TestPlan.comments">Ask a kTable for some information about a customer</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values" enabled="true">
+          <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/event.gs</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script"></stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate cookie" enabled="true">
+          <stringProp name="TestPlan.comments">Pick random store; 85 in total</stringProp>
+          <stringProp name="variableName">cookie</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">100000</stringProp>
+          <stringProp name="maximumValue">999999</stringProp>
+          <stringProp name="randomSeed"></stringProp>
+          <boolProp name="perThread">true</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing - Email Action - REST" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">3</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP.SHORT}</stringProp>
+        <longProp name="ThreadGroup.start_time">1435686326000</longProp>
+        <longProp name="ThreadGroup.end_time">1435686326000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <stringProp name="TestPlan.comments">Martech Events</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values" enabled="true">
+          <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/events.gs</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script"></stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="96619420">email</stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="-2077546080">
+                <stringProp name="75152863">${__changeCase(${__V(${given})}${__V(${family})},LOWER,)}${__Random(1,99)}@${__RandomString(10,aaabcdeeeeefghiiijklmnoooprstuuuvwy)}.com</stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="[Post] Martech Event - Test Sampler" enabled="false">
+          <boolProp name="WAITING">true</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">{
+  &quot;partition_id&quot;: null,
+  &quot;headers&quot;: [],
+  &quot;key&quot;: {
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;
+  },
+  &quot;value&quot;: {
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: {
+	  &quot;Cookie&quot;: &quot;&quot;,
+	  &quot;Type&quot;:&quot;${mockdata.eventType}&quot;,
+	  &quot;Subtype&quot;: &quot;&quot;,
+	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
+	  &quot;Email&quot;: &quot;${email}&quot;,
+	  &quot;Referer&quot;: &quot;&quot;,
+	  &quot;URL&quot;: &quot;&quot;,
+	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,
+	  &quot;SourceMessageNumber&quot;: &quot;&quot;,
+	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
+	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,
+	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,
+	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,
+	  &quot;UserClient&quot;: &quot;&quot;,
+	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,
+	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;
+    }
+  }
+}</stringProp>
+          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+          <stringProp name="TestPlan.comments">Generate random accountId to simulate a click from a known customer; pick a random category and product of interest</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JWT Encrypt" enabled="false">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+import com.google.gson.JsonObject;
+
+// get JWT secret key from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+
+// construct your body data - JSON entity in case below
+
+JsonObject jo = new JsonObject();
+
+jo.addProperty(&quot;param1&quot;, &quot;PARAM_1&quot;);
+jo.addProperty(&quot;param2&quot;, &quot;PARAM_2&quot;);
+jo.addProperty(&quot;param3&quot;, &quot;PARAM_3&quot;);
+
+String jsonString = jo.toString();
+
+// perform JWT-signing of body data
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	String jwtToken = Jwts.builder()
+	     .setHeaderParam(&quot;typ&quot;,&quot;JWT&quot;)
+	     .setPayload(jsonString)
+	     .signWith(SignatureAlgorithm.HS256, secret) 	// base64EncodedSecretKey
+	     .compact();
+
+	// put JWT-signed body data into variable
+	vars.put(&quot;jwtToken&quot;, jwtToken);
+} catch (Exception ex) {
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JWT Decrypt" enabled="false">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+
+// get JWT secret key and response value (to check response against it) from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+String status = params[1];
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	// access response data
+	String response = ctx.getPreviousResult().getResponseDataAsString();
+	
+	if (response.equals(&quot;&quot;)) {
+		prev.setSuccessful(false);
+		Failure = true;
+		FailureMessage = &quot;ERROR : Response is EMPTY.&quot;;
+		throw new Exception(&quot;ERROR : Response is EMPTY.&quot;);
+	} else {
+	  	// perform decoding of JWT-signed response
+		Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getBody();		// base64EncodedSecretKey
+		JwsHeader header = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getHeader();	// base64EncodedSecretKey
+		String jwtResponse = claims.toString();
+
+    		// OPTIONALLY: check any value against decoded response
+		if (!jwtResponse.contains(status)) {
+			prev.setSuccessful(false);
+			Failure = true;
+			FailureMessage = &quot;ERROR: response doesn&apos;t contain &quot; + status.toUpperCase();
+		}
+
+    		// OPTIONALLY: add to sampler&apos;s repsonse decoded equivalent of JWT-signed response data as well - 
+    		// to display in JMeter UI or to apply any assertions;
+		StringBuilder fullResponse = new StringBuilder();
+		fullResponse.append(prev.getResponseDataAsString());
+		fullResponse.append(&quot;\n\n&quot;).append(jwtResponse);
+		prev.setResponseData(fullResponse.toString());
+	}
+} catch (SignatureException e) {
+	// don&apos;t trust the JWT!
+	e.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(e.getMessage());
+	System.err.println(e.getMessage());
+} catch (MalformedJwtException ex) {
+	ex.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Martech Event" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+	  &quot;Cookie&quot;: &quot;&quot;,&#xd;
+	  &quot;Type&quot;:&quot;${mockValues.eventType}&quot;,&#xd;
+	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
+	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
+	  &quot;Email&quot;: &quot;${email}&quot;,&#xd;
+	  &quot;Referer&quot;: &quot;&quot;,&#xd;
+	  &quot;URL&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,&#xd;
+	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,&#xd;
+	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
+	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,&#xd;
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,&#xd;
+	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+          <stringProp name="HTTPSampler.port">443</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/web.events/records</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="TestPlan.comments">Post an event using the Confluent Cloud REST Produce</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
+            <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+          </GaussianRandomTimer>
+          <hashTree/>
+        </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="jMeter Variable Debug Sampler" enabled="false">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+          <stringProp name="TestPlan.comments">Use this to see the state of jmeter&apos;s variables right now</stringProp>
+        </DebugSampler>
+        <hashTree/>
+        <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">300</stringProp>
+          <stringProp name="RandomTimer.range">2000</stringProp>
+        </GaussianRandomTimer>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Website Clickstream - REST Produce" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">15</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP.SHORT}</stringProp>
+        <longProp name="ThreadGroup.start_time">1435686326000</longProp>
+        <longProp name="ThreadGroup.end_time">1435686326000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <stringProp name="TestPlan.comments">eCommerce and browsing clickstream</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values" enabled="true">
+          <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/events.gs</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script"></stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="96619420">email</stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="-2077546080">
+                <stringProp name="75152863">${__changeCase(${__V(${given})}${__V(${family})},LOWER,)}${__Random(1,99)}@${__RandomString(10,aaabcdeeeeefghiiijklmnoooprstuuuvwy)}.com</stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txOrg" enabled="true">
+          <stringProp name="TestPlan.comments">Pick random store; 85 in total. 0 is online source.</stringProp>
+          <stringProp name="variableName">txOrg</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">0</stringProp>
+          <stringProp name="maximumValue">85</stringProp>
+          <stringProp name="randomSeed"></stringProp>
+          <boolProp name="perThread">true</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate browseCount" enabled="true">
+          <stringProp name="TestPlan.comments">Number of items in this transaction</stringProp>
+          <stringProp name="variableName">browseCount</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="maximumValue">4</stringProp>
+          <stringProp name="randomSeed"></stringProp>
+          <boolProp name="perThread">true</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate cookie" enabled="true">
+          <stringProp name="TestPlan.comments">Number of items in this transaction</stringProp>
+          <stringProp name="variableName">cookie</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">100000</stringProp>
+          <stringProp name="maximumValue">999999</stringProp>
+          <stringProp name="randomSeed"></stringProp>
+          <boolProp name="perThread">true</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txCount" enabled="true">
+          <stringProp name="TestPlan.comments">Number of items in this transaction</stringProp>
+          <stringProp name="variableName">txCount</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="maximumValue">8</stringProp>
+          <stringProp name="randomSeed"></stringProp>
+          <boolProp name="perThread">true</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="jMeter Variable Debug Sampler" enabled="false">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+          <stringProp name="TestPlan.comments">Use this to see the state of jmeter&apos;s variables right now</stringProp>
+        </DebugSampler>
+        <hashTree/>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Browsing" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${browseCount}</stringProp>
+          <stringProp name="TestPlan.comments">Number of pages this fake user has viewed anonymously</stringProp>
+        </LoopController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Event Values - New Action" enabled="true">
+            <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
+            <stringProp name="cacheKey">false</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">// Event Condition
+String[] eventType  = [&apos;emailSend&apos;, &apos;emailOpen&apos;, &apos;emailClick&apos;, &apos;emailBounce&apos;, &apos;emailSubscribe&apos;, &apos;emailUnsubscribe&apos;,&apos;productBrowsed&apos;, &apos;categoryBrowsed&apos;, &apos;onsiteSearch&apos;, &apos;cartUpdated&apos;, &apos;checkout&apos;,&apos;smsSubscribe&apos;, &apos;smsOpen&apos;, &apos;smsClick&apos;, &apos;smsUnsubscribe&apos;, &apos;smsSend&apos;, &apos;smsDeliver&apos;];
+int      eventTypeIdx = org.apache.commons.lang3.RandomUtils.nextInt(0, eventType.size());
+
+vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="96619420">email</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="-2077546080">
+                  <stringProp name="75152863">${__changeCase(${__V(${given})}${__V(${family})},LOWER,)}${__Random(1,99)}@${__RandomString(10,aaabcdeeeeefghiiijklmnoooprstuuuvwy)}.com</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">true</boolProp>
+            </UserParameters>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream View" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;ssid_web1_${cookie}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
+	  &quot;Type&quot;:&quot;categoryBrowsed&quot;,&#xd;
+	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
+	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
+	  &quot;Email&quot;: &quot;&quot;,&#xd;
+	  &quot;Referer&quot;: &quot;&quot;,&#xd;
+	  &quot;URL&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceCustomerNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SearchTerm&quot;: &quot;&quot;,&#xd;
+	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
+	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,&#xd;
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,&#xd;
+	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/ecommerce.clickstream/records</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="[POST] Clickstream - Test Clickstream Sampler" enabled="false">
+            <boolProp name="WAITING">true</boolProp>
+            <boolProp name="SUCCESFULL">true</boolProp>
+            <stringProp name="RESPONSE_CODE">200</stringProp>
+            <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+            <stringProp name="REQUEST_DATA">{
+  &quot;partition_id&quot;: null,
+  &quot;headers&quot;: [],
+  &quot;key&quot;: {
+    &quot;type&quot;: &quot;BINARY&quot;,
+    &quot;data&quot;: &quot;ssid_web1_${cookie}&quot;
+  },
+  &quot;value&quot;: {
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: {
+	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,
+	  &quot;Type&quot;:&quot;${mockValues.eventType}&quot;,
+	  &quot;Subtype&quot;: &quot;&quot;,
+	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
+	  &quot;Email&quot;: &quot;&quot;,
+	  &quot;Referer&quot;: &quot;&quot;,
+	  &quot;URL&quot;: &quot;&quot;,
+	  &quot;SourceCustomerNumber&quot;: &quot;&quot;,
+	  &quot;SourceMessageNumber&quot;: &quot;&quot;,
+	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
+	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,
+	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,
+	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,
+	  &quot;UserClient&quot;: &quot;&quot;,
+	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,
+	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;
+    }
+  }
+}</stringProp>
+            <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+            <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+            <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+            <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+            <stringProp name="URL"></stringProp>
+            <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+          </kg.apc.jmeter.samplers.DummySampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JWT Encrypt" enabled="false">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+import com.google.gson.JsonObject;
+
+// get JWT secret key from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+
+// construct your body data - JSON entity in case below
+
+JsonObject jo = new JsonObject();
+
+jo.addProperty(&quot;param1&quot;, &quot;PARAM_1&quot;);
+jo.addProperty(&quot;param2&quot;, &quot;PARAM_2&quot;);
+jo.addProperty(&quot;param3&quot;, &quot;PARAM_3&quot;);
+
+String jsonString = jo.toString();
+
+// perform JWT-signing of body data
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	String jwtToken = Jwts.builder()
+	     .setHeaderParam(&quot;typ&quot;,&quot;JWT&quot;)
+	     .setPayload(jsonString)
+	     .signWith(SignatureAlgorithm.HS256, secret) 	// base64EncodedSecretKey
+	     .compact();
+
+	// put JWT-signed body data into variable
+	vars.put(&quot;jwtToken&quot;, jwtToken);
+} catch (Exception ex) {
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JWT Decrypt" enabled="false">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+
+// get JWT secret key and response value (to check response against it) from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+String status = params[1];
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	// access response data
+	String response = ctx.getPreviousResult().getResponseDataAsString();
+	
+	if (response.equals(&quot;&quot;)) {
+		prev.setSuccessful(false);
+		Failure = true;
+		FailureMessage = &quot;ERROR : Response is EMPTY.&quot;;
+		throw new Exception(&quot;ERROR : Response is EMPTY.&quot;);
+	} else {
+	  	// perform decoding of JWT-signed response
+		Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getBody();		// base64EncodedSecretKey
+		JwsHeader header = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getHeader();	// base64EncodedSecretKey
+		String jwtResponse = claims.toString();
+
+    		// OPTIONALLY: check any value against decoded response
+		if (!jwtResponse.contains(status)) {
+			prev.setSuccessful(false);
+			Failure = true;
+			FailureMessage = &quot;ERROR: response doesn&apos;t contain &quot; + status.toUpperCase();
+		}
+
+    		// OPTIONALLY: add to sampler&apos;s repsonse decoded equivalent of JWT-signed response data as well - 
+    		// to display in JMeter UI or to apply any assertions;
+		StringBuilder fullResponse = new StringBuilder();
+		fullResponse.append(prev.getResponseDataAsString());
+		fullResponse.append(&quot;\n\n&quot;).append(jwtResponse);
+		prev.setResponseData(fullResponse.toString());
+	}
+} catch (SignatureException e) {
+	// don&apos;t trust the JWT!
+	e.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(e.getMessage());
+	System.err.println(e.getMessage());
+} catch (MalformedJwtException ex) {
+	ex.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Search" enabled="true">
+            <intProp name="ThroughputController.style">1</intProp>
+            <boolProp name="ThroughputController.perThread">false</boolProp>
+            <intProp name="ThroughputController.maxThroughput">1</intProp>
+            <FloatProperty>
+              <name>ThroughputController.percentThroughput</name>
+              <value>10.0</value>
+              <savedValue>0.0</savedValue>
+            </FloatProperty>
+          </ThroughputController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream View" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;ssid_web1_${cookie}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
+	  &quot;Type&quot;:&quot;onsiteSearch&quot;,&#xd;
+	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
+	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
+	  &quot;Email&quot;: &quot;&quot;,&#xd;
+	  &quot;Referer&quot;: &quot;&quot;,&#xd;
+	  &quot;URL&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceCustomerNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,&#xd;
+	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
+	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,&#xd;
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,&#xd;
+	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+              <stringProp name="HTTPSampler.port">443</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/ecommerce.clickstream/records</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="49586">200</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">8</intProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">300</stringProp>
+          <stringProp name="RandomTimer.range">2000</stringProp>
+        </GaussianRandomTimer>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Purchase Event" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <FloatProperty>
+            <name>ThroughputController.percentThroughput</name>
+            <value>10.0</value>
+            <savedValue>0.0</savedValue>
+          </FloatProperty>
+          <stringProp name="TestPlan.comments">Now the customer has filled in some data; unite their anonymous cookie with customer data!</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
+            <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
+            <stringProp name="cacheKey">false</stringProp>
+            <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/transaction.gs</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script"></stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream Customer Data" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
+	  &quot;Type&quot;:&quot;checkout&quot;,&#xd;
+	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
+	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
+	  &quot;Email&quot;: &quot;${email}&quot;,&#xd;
+	  &quot;Referer&quot;: &quot;&quot;,&#xd;
+	  &quot;URL&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,&#xd;
+	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,&#xd;
+	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
+	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,&#xd;
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.OS}&quot;,&#xd;
+	  &quot;Browser&quot;: &quot;${mockValues.browser}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/retail.customers/records</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="false">
+              <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
+              <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+            </GaussianRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream Address Data" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;${__Random(100000,999999,addressId)}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+      &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,&#xd;
+      &quot;AddressType&quot;:&quot;${__RandomString(1,HWU)}&quot;,&#xd;
+      &quot;Address1&quot;: &quot;${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}&quot;, &#xd;
+      &quot;Address2&quot;: &quot;&quot;,&#xd;
+      &quot;City&quot;: &quot;${__changeCase(${__V(${city})},CAPITALIZE,)}&quot;,&#xd;
+      &quot;Zip&quot;: &quot;${zip}&quot;,&#xd;
+      &quot;ZipExt&quot;: &quot;&quot;,&#xd;
+      &quot;State&quot;: &quot;${state}&quot;,&#xd;
+      &quot;Country&quot;: &quot;United States&quot;,&#xd;
+      &quot;CountryCode&quot;: &quot;US&quot;,&#xd;
+      &quot;CarrierRoute&quot;: &quot;&quot;,&#xd;
+      &quot;Certified&quot;: &quot;&quot;,&#xd;
+      &quot;CMRA&quot;: &quot;&quot;,&#xd;
+      &quot;DateCertified&quot;: &quot;&quot;,&#xd;
+      &quot;DeleteFlag&quot;: &quot;N&quot;,&#xd;
+      &quot;DeliveryPointCheckDigit&quot;: &quot;&quot;,&#xd;
+      &quot;DeliveryPointCode&quot;: &quot;&quot;,&#xd;
+      &quot;DpvConfirm&quot;: &quot;&quot;,&#xd;
+      &quot;ErrorCode&quot;: &quot;&quot;,&#xd;
+      &quot;ErrorString&quot;: &quot;&quot;,&#xd;
+      &quot;LACS&quot;: &quot;&quot;,&#xd;
+      &quot;Latitude&quot;: &quot;&quot;,&#xd;
+      &quot;Longitude&quot;: &quot;&quot;,&#xd;
+      &quot;MatchFlag&quot;: &quot;&quot;,&#xd;
+      &quot;MoveDate&quot;: &quot;&quot;,&#xd;
+      &quot;MoveType&quot;: &quot;&quot;,&#xd;
+      &quot;NCOADateModified&quot;: &quot;&quot;,&#xd;
+      &quot;NCOADateUpdate&quot;: &quot;&quot;,&#xd;
+      &quot;RBDI&quot;: &quot;&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/retail.addresses/records</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="false">
+              <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
+              <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+            </GaussianRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream Address Customer" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;${accountId}-${addressId}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+      &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,&#xd;
+      &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/retail.customers.addresses/records</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="false">
+              <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
+              <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+            </GaussianRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="[POST] Clickstream - Test Customer Sampler" enabled="false">
+            <boolProp name="WAITING">true</boolProp>
+            <boolProp name="SUCCESFULL">true</boolProp>
+            <stringProp name="RESPONSE_CODE">200</stringProp>
+            <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+            <stringProp name="REQUEST_DATA">{
+  &quot;partition_id&quot;: null,
+  &quot;headers&quot;: [],
+  &quot;key&quot;: {
+    &quot;type&quot;: &quot;BINARY&quot;,
+    &quot;data&quot;: &quot;ssid_web1_${cookie}&quot;
+  },
+  &quot;value&quot;: {
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: {
+	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,
+	  &quot;Type&quot;:&quot;checkout&quot;,
+	  &quot;Subtype&quot;: &quot;&quot;,
+	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
+	  &quot;Email&quot;: &quot;${email}&quot;,
+	  &quot;Referer&quot;: &quot;&quot;,
+	  &quot;URL&quot;: &quot;&quot;,
+	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${__Random(100000,999999,accountId)}&quot;,
+	  &quot;SourceMessageNumber&quot;: &quot;&quot;,
+	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
+	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,
+	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,
+	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,
+	  &quot;UserClient&quot;: &quot;&quot;,
+	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,
+	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;
+    }
+  }
+}</stringProp>
+            <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+            <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+            <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+            <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+            <stringProp name="URL"></stringProp>
+            <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+          </kg.apc.jmeter.samplers.DummySampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JWT Encrypt" enabled="false">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+import com.google.gson.JsonObject;
+
+// get JWT secret key from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+
+// construct your body data - JSON entity in case below
+
+JsonObject jo = new JsonObject();
+
+jo.addProperty(&quot;param1&quot;, &quot;PARAM_1&quot;);
+jo.addProperty(&quot;param2&quot;, &quot;PARAM_2&quot;);
+jo.addProperty(&quot;param3&quot;, &quot;PARAM_3&quot;);
+
+String jsonString = jo.toString();
+
+// perform JWT-signing of body data
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	String jwtToken = Jwts.builder()
+	     .setHeaderParam(&quot;typ&quot;,&quot;JWT&quot;)
+	     .setPayload(jsonString)
+	     .signWith(SignatureAlgorithm.HS256, secret) 	// base64EncodedSecretKey
+	     .compact();
+
+	// put JWT-signed body data into variable
+	vars.put(&quot;jwtToken&quot;, jwtToken);
+} catch (Exception ex) {
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JWT Decrypt" enabled="false">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+
+// get JWT secret key and response value (to check response against it) from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+String status = params[1];
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	// access response data
+	String response = ctx.getPreviousResult().getResponseDataAsString();
+	
+	if (response.equals(&quot;&quot;)) {
+		prev.setSuccessful(false);
+		Failure = true;
+		FailureMessage = &quot;ERROR : Response is EMPTY.&quot;;
+		throw new Exception(&quot;ERROR : Response is EMPTY.&quot;);
+	} else {
+	  	// perform decoding of JWT-signed response
+		Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getBody();		// base64EncodedSecretKey
+		JwsHeader header = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getHeader();	// base64EncodedSecretKey
+		String jwtResponse = claims.toString();
+
+    		// OPTIONALLY: check any value against decoded response
+		if (!jwtResponse.contains(status)) {
+			prev.setSuccessful(false);
+			Failure = true;
+			FailureMessage = &quot;ERROR: response doesn&apos;t contain &quot; + status.toUpperCase();
+		}
+
+    		// OPTIONALLY: add to sampler&apos;s repsonse decoded equivalent of JWT-signed response data as well - 
+    		// to display in JMeter UI or to apply any assertions;
+		StringBuilder fullResponse = new StringBuilder();
+		fullResponse.append(prev.getResponseDataAsString());
+		fullResponse.append(&quot;\n\n&quot;).append(jwtResponse);
+		prev.setResponseData(fullResponse.toString());
+	}
+} catch (SignatureException e) {
+	// don&apos;t trust the JWT!
+	e.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(e.getMessage());
+	System.err.println(e.getMessage());
+} catch (MalformedJwtException ex) {
+	ex.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="[POST] Clickstream - Test Address Sampler" enabled="false">
+            <boolProp name="WAITING">true</boolProp>
+            <boolProp name="SUCCESFULL">true</boolProp>
+            <stringProp name="RESPONSE_CODE">200</stringProp>
+            <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+            <stringProp name="REQUEST_DATA">{
+  &quot;partition_id&quot;: null,
+  &quot;headers&quot;: [],
+  &quot;key&quot;: {
+    &quot;type&quot;: &quot;BINARY&quot;,
+    &quot;data&quot;: &quot;${__Random(100000,999999,addressId)}&quot;
+  },
+  &quot;value&quot;: {
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: {
+      &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,
+      &quot;AddressType&quot;:&quot;${__RandomString(1,HWU)}&quot;,
+      &quot;Address1&quot;: &quot;${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}&quot;, 
+      &quot;Address2&quot;: &quot;&quot;,
+      &quot;City&quot;: &quot;${__changeCase(${__V(${city})},CAPITALIZE,)}&quot;,
+      &quot;Zip&quot;: &quot;${zip}&quot;,
+      &quot;ZipExt&quot;: &quot;&quot;,
+      &quot;State&quot;: &quot;${state}&quot;,
+      &quot;Country&quot;: &quot;United States&quot;,
+      &quot;CountryCode&quot;: &quot;US&quot;,
+      &quot;CarrierRoute&quot;: &quot;&quot;,
+      &quot;Certified&quot;: &quot;&quot;,
+      &quot;CMRA&quot;: &quot;&quot;,
+      &quot;DateCertified&quot;: &quot;&quot;,
+      &quot;DeleteFlag&quot;: &quot;N&quot;,
+      &quot;DeliveryPointCheckDigit&quot;: &quot;&quot;,
+      &quot;DeliveryPointCode&quot;: &quot;&quot;,
+      &quot;DpvConfirm&quot;: &quot;&quot;,
+      &quot;ErrorCode&quot;: &quot;&quot;,
+      &quot;ErrorString&quot;: &quot;&quot;,
+      &quot;LACS&quot;: &quot;&quot;,
+      &quot;Latitude&quot;: &quot;&quot;,
+      &quot;Longitude&quot;: &quot;&quot;,
+      &quot;MatchFlag&quot;: &quot;&quot;,
+      &quot;MoveDate&quot;: &quot;&quot;,
+      &quot;MoveType&quot;: &quot;&quot;,
+      &quot;NCOADateModified&quot;: &quot;&quot;,
+      &quot;NCOADateUpdate&quot;: &quot;&quot;,
+      &quot;RBDI&quot;: &quot;&quot;
+    }
+  }
+}</stringProp>
+            <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+            <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+            <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+            <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+            <stringProp name="URL"></stringProp>
+            <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+          </kg.apc.jmeter.samplers.DummySampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JWT Encrypt" enabled="false">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+import com.google.gson.JsonObject;
+
+// get JWT secret key from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+
+// construct your body data - JSON entity in case below
+
+JsonObject jo = new JsonObject();
+
+jo.addProperty(&quot;param1&quot;, &quot;PARAM_1&quot;);
+jo.addProperty(&quot;param2&quot;, &quot;PARAM_2&quot;);
+jo.addProperty(&quot;param3&quot;, &quot;PARAM_3&quot;);
+
+String jsonString = jo.toString();
+
+// perform JWT-signing of body data
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	String jwtToken = Jwts.builder()
+	     .setHeaderParam(&quot;typ&quot;,&quot;JWT&quot;)
+	     .setPayload(jsonString)
+	     .signWith(SignatureAlgorithm.HS256, secret) 	// base64EncodedSecretKey
+	     .compact();
+
+	// put JWT-signed body data into variable
+	vars.put(&quot;jwtToken&quot;, jwtToken);
+} catch (Exception ex) {
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JWT Decrypt" enabled="false">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+
+// get JWT secret key and response value (to check response against it) from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+String status = params[1];
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	// access response data
+	String response = ctx.getPreviousResult().getResponseDataAsString();
+	
+	if (response.equals(&quot;&quot;)) {
+		prev.setSuccessful(false);
+		Failure = true;
+		FailureMessage = &quot;ERROR : Response is EMPTY.&quot;;
+		throw new Exception(&quot;ERROR : Response is EMPTY.&quot;);
+	} else {
+	  	// perform decoding of JWT-signed response
+		Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getBody();		// base64EncodedSecretKey
+		JwsHeader header = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getHeader();	// base64EncodedSecretKey
+		String jwtResponse = claims.toString();
+
+    		// OPTIONALLY: check any value against decoded response
+		if (!jwtResponse.contains(status)) {
+			prev.setSuccessful(false);
+			Failure = true;
+			FailureMessage = &quot;ERROR: response doesn&apos;t contain &quot; + status.toUpperCase();
+		}
+
+    		// OPTIONALLY: add to sampler&apos;s repsonse decoded equivalent of JWT-signed response data as well - 
+    		// to display in JMeter UI or to apply any assertions;
+		StringBuilder fullResponse = new StringBuilder();
+		fullResponse.append(prev.getResponseDataAsString());
+		fullResponse.append(&quot;\n\n&quot;).append(jwtResponse);
+		prev.setResponseData(fullResponse.toString());
+	}
+} catch (SignatureException e) {
+	// don&apos;t trust the JWT!
+	e.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(e.getMessage());
+	System.err.println(e.getMessage());
+} catch (MalformedJwtException ex) {
+	ex.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="[POST] Clickstream - Test Address Customer Sampler" enabled="false">
+            <boolProp name="WAITING">true</boolProp>
+            <boolProp name="SUCCESFULL">true</boolProp>
+            <stringProp name="RESPONSE_CODE">200</stringProp>
+            <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+            <stringProp name="REQUEST_DATA">{
+  &quot;partition_id&quot;: null,
+  &quot;headers&quot;: [],
+  &quot;key&quot;: {
+    &quot;type&quot;: &quot;BINARY&quot;,
+    &quot;data&quot;: &quot;${accountId}-${addressId}&quot;
+  },
+  &quot;value&quot;: {
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: {
+      &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,
+      &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+    }
+  }
+}</stringProp>
+            <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+            <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+            <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+            <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+            <stringProp name="URL"></stringProp>
+            <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+          </kg.apc.jmeter.samplers.DummySampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JWT Encrypt" enabled="false">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+import com.google.gson.JsonObject;
+
+// get JWT secret key from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+
+// construct your body data - JSON entity in case below
+
+JsonObject jo = new JsonObject();
+
+jo.addProperty(&quot;param1&quot;, &quot;PARAM_1&quot;);
+jo.addProperty(&quot;param2&quot;, &quot;PARAM_2&quot;);
+jo.addProperty(&quot;param3&quot;, &quot;PARAM_3&quot;);
+
+String jsonString = jo.toString();
+
+// perform JWT-signing of body data
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	String jwtToken = Jwts.builder()
+	     .setHeaderParam(&quot;typ&quot;,&quot;JWT&quot;)
+	     .setPayload(jsonString)
+	     .signWith(SignatureAlgorithm.HS256, secret) 	// base64EncodedSecretKey
+	     .compact();
+
+	// put JWT-signed body data into variable
+	vars.put(&quot;jwtToken&quot;, jwtToken);
+} catch (Exception ex) {
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JWT Decrypt" enabled="false">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import java.util.*;
+import java.text.*;
+import org.json.*;
+import io.jsonwebtoken.*
+import org.apache.commons.codec.binary.Base64;
+
+// get JWT secret key and response value (to check response against it) from params
+String [] params = Parameters.split(&quot;,&quot;);
+String secret_key = params[0];
+String status = params[1];
+
+byte[] bytesEncoded = Base64.encodeBase64(secret_key.getBytes());
+String secret = new String(bytesEncoded);
+
+try {
+	// access response data
+	String response = ctx.getPreviousResult().getResponseDataAsString();
+	
+	if (response.equals(&quot;&quot;)) {
+		prev.setSuccessful(false);
+		Failure = true;
+		FailureMessage = &quot;ERROR : Response is EMPTY.&quot;;
+		throw new Exception(&quot;ERROR : Response is EMPTY.&quot;);
+	} else {
+	  	// perform decoding of JWT-signed response
+		Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getBody();		// base64EncodedSecretKey
+		JwsHeader header = Jwts.parser().setSigningKey(secret).parseClaimsJws(response).getHeader();	// base64EncodedSecretKey
+		String jwtResponse = claims.toString();
+
+    		// OPTIONALLY: check any value against decoded response
+		if (!jwtResponse.contains(status)) {
+			prev.setSuccessful(false);
+			Failure = true;
+			FailureMessage = &quot;ERROR: response doesn&apos;t contain &quot; + status.toUpperCase();
+		}
+
+    		// OPTIONALLY: add to sampler&apos;s repsonse decoded equivalent of JWT-signed response data as well - 
+    		// to display in JMeter UI or to apply any assertions;
+		StringBuilder fullResponse = new StringBuilder();
+		fullResponse.append(prev.getResponseDataAsString());
+		fullResponse.append(&quot;\n\n&quot;).append(jwtResponse);
+		prev.setResponseData(fullResponse.toString());
+	}
+} catch (SignatureException e) {
+	// don&apos;t trust the JWT!
+	e.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(e.getMessage());
+	System.err.println(e.getMessage());
+} catch (MalformedJwtException ex) {
+	ex.printStackTrace();
+	prev.setSuccessful(false);
+	log.error(ex.getMessage());
+	System.err.println(ex.getMessage());
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+          <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">300</stringProp>
+            <stringProp name="RandomTimer.range">2000</stringProp>
+          </GaussianRandomTimer>
+          <hashTree/>
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Purchase Transaction" enabled="true">
+            <intProp name="ThroughputController.style">1</intProp>
+            <boolProp name="ThroughputController.perThread">false</boolProp>
+            <intProp name="ThroughputController.maxThroughput">1</intProp>
+            <FloatProperty>
+              <name>ThroughputController.percentThroughput</name>
+              <value>10.0</value>
+              <savedValue>0.0</savedValue>
+            </FloatProperty>
+            <stringProp name="TestPlan.comments">Limited to a percentage of total customer leads</stringProp>
+          </ThroughputController>
+          <hashTree>
+            <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txOrg" enabled="true">
+              <stringProp name="TestPlan.comments">Pick random store; 85 in total</stringProp>
+              <stringProp name="variableName">txOrg</stringProp>
+              <stringProp name="outputFormat"></stringProp>
+              <stringProp name="minimumValue">1</stringProp>
+              <stringProp name="maximumValue">85</stringProp>
+              <stringProp name="randomSeed"></stringProp>
+              <boolProp name="perThread">true</boolProp>
+            </RandomVariableConfig>
+            <hashTree/>
+            <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txCount" enabled="true">
+              <stringProp name="TestPlan.comments">Number of items in this transaction</stringProp>
+              <stringProp name="variableName">txCount</stringProp>
+              <stringProp name="outputFormat"></stringProp>
+              <stringProp name="minimumValue">1</stringProp>
+              <stringProp name="maximumValue">8</stringProp>
+              <stringProp name="randomSeed"></stringProp>
+              <boolProp name="perThread">true</boolProp>
+            </RandomVariableConfig>
+            <hashTree/>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
+              <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
+              <stringProp name="cacheKey">false</stringProp>
+              <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/transaction.gs</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script"></stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Sampler>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Customer - Transaction" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;${txId}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+      &quot;SourceTransactionNumber&quot;: &quot;STN-${__Random(1000000,9999999,txId)}&quot;,&#xd;
+      &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,&#xd;
+      &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,&#xd;
+      &quot;Currency&quot;: &quot;USD&quot;,&#xd;
+      &quot;Discount&quot;: &quot;&quot;,&#xd;
+      &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,&#xd;
+      &quot;Type&quot;: &quot;Purchase&quot;,&#xd;
+      &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
+      &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+              <stringProp name="HTTPSampler.port">443</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/ecommerce.transaction/records</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="49586">200</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">8</intProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+              </ResponseAssertion>
+              <hashTree/>
+              <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="false">
+                <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
+                <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+              </GaussianRandomTimer>
+              <hashTree/>
+            </hashTree>
+            <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="[POST] Clickstream - Test - Transaction Sampler" enabled="false">
+              <boolProp name="WAITING">false</boolProp>
+              <boolProp name="SUCCESFULL">true</boolProp>
+              <stringProp name="RESPONSE_CODE">200</stringProp>
+              <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+              <stringProp name="REQUEST_DATA">{
+  &quot;partition_id&quot;: null,
+  &quot;headers&quot;: [],
+  &quot;key&quot;: {
+    &quot;type&quot;: &quot;BINARY&quot;,
+    &quot;data&quot;: &quot;${txId}&quot;
+  },
+  &quot;value&quot;: {
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: {
+      &quot;SourceTransactionNumber&quot;: &quot;STN-${__Random(1000000,9999999,txId)}&quot;,
+      &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+      &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
+      &quot;Currency&quot;: &quot;USD&quot;,
+      &quot;Discount&quot;: &quot;&quot;,
+      &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
+      &quot;Type&quot;: &quot;Purchase&quot;,
+      &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
+      &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+    }
+  }
+}</stringProp>
+              <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+              <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+              <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+              <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+              <stringProp name="URL"></stringProp>
+              <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+            </kg.apc.jmeter.samplers.DummySampler>
+            <hashTree/>
+            <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Transaction Items" enabled="true">
+              <boolProp name="LoopController.continue_forever">true</boolProp>
+              <stringProp name="LoopController.loops">${txCount}</stringProp>
+            </LoopController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Customer - Transaction" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;${txId}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+      &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,&#xd;
+      &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,&#xd;
+      &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,&#xd;
+      &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,&#xd;
+      &quot;Subtype&quot;: &quot;Purchase&quot;,&#xd;
+      &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,&#xd;
+      &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,&#xd;
+      &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,&#xd;
+      &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,&#xd;
+      &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,&#xd;
+      &quot;ListPrice&quot;: &quot;${mockValues.txPricePerItem}&quot;,&#xd;
+      &quot;Currency&quot;: &quot;USD&quot;,&#xd;
+      &quot;SaleRevenue&quot;: &quot;${mockValues.txRevenuePerItem}&quot;,&#xd;
+      &quot;Discount&quot;: &quot;&quot;,&#xd;
+      &quot;CostBasis&quot;: &quot;&quot;,&#xd;
+      &quot;Tax&quot;: &quot;${mockValues.txTaxPerItem}&quot;,&#xd;
+      &quot;ShipDate&quot;: &quot;&quot;,  &#xd;
+      &quot;ShippingRevenue&quot;: &quot;&quot;,&#xd;
+      &quot;ShippingCost&quot;: &quot;&quot;,&#xd;
+      &quot;ShippingDiscount&quot;: &quot;&quot;,&#xd;
+      &quot;OtherRevenue&quot;: &quot;&quot;,&#xd;
+      &quot;OtherCosts&quot;: &quot;&quot;,&#xd;
+      &quot;DateCreated&quot;: &quot;${txDate}&quot;,&#xd;
+      &quot;Gift&quot;: &quot;${__RandomString(1,YN)}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+                <stringProp name="HTTPSampler.port">443</stringProp>
+                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/ecommerce.transaction.item/records</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="49586">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                  <stringProp name="Assertion.custom_message"></stringProp>
+                </ResponseAssertion>
+                <hashTree/>
+                <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="false">
+                  <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
+                  <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+                </GaussianRandomTimer>
+                <hashTree/>
+              </hashTree>
+              <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="[POST] Clickstream - Test Transaction Item Sampler" enabled="false">
+                <boolProp name="WAITING">false</boolProp>
+                <boolProp name="SUCCESFULL">true</boolProp>
+                <stringProp name="RESPONSE_CODE">200</stringProp>
+                <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+                <stringProp name="REQUEST_DATA">{
+  &quot;partition_id&quot;: null,
+  &quot;headers&quot;: [],
+  &quot;key&quot;: {
+    &quot;type&quot;: &quot;BINARY&quot;,
+    &quot;data&quot;: &quot;${txId}&quot;
+  },
+  &quot;value&quot;: {
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: {
+      &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
+      &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
+      &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+      &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
+      &quot;Subtype&quot;: &quot;Purchase&quot;,
+      &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
+      &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
+      &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
+      &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
+      &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
+      &quot;ListPrice&quot;: &quot;${mockValues.txPricePerItem}&quot;,
+      &quot;Currency&quot;: &quot;USD&quot;,
+      &quot;SaleRevenue&quot;: &quot;${mockValues.txRevenuePerItem}&quot;,
+      &quot;Discount&quot;: &quot;&quot;,
+      &quot;CostBasis&quot;: &quot;&quot;,
+      &quot;Tax&quot;: &quot;${mockValues.txTaxPerItem}&quot;,
+      &quot;ShipDate&quot;: &quot;&quot;,  
+      &quot;ShippingRevenue&quot;: &quot;&quot;,
+      &quot;ShippingCost&quot;: &quot;&quot;,
+      &quot;ShippingDiscount&quot;: &quot;&quot;,
+      &quot;OtherRevenue&quot;: &quot;&quot;,
+      &quot;OtherCosts&quot;: &quot;&quot;,
+      &quot;DateCreated&quot;: &quot;${txDate}&quot;,
+      &quot;Gift&quot;: &quot;${__RandomString(1,YN)}&quot;
+    }
+  }
+}</stringProp>
+                <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+                <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+                <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+                <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+                <stringProp name="URL"></stringProp>
+                <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+              </kg.apc.jmeter.samplers.DummySampler>
+              <hashTree/>
+            </hashTree>
+            <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+              <stringProp name="ConstantTimer.delay">300</stringProp>
+              <stringProp name="RandomTimer.range">2000</stringProp>
+            </GaussianRandomTimer>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Customers &amp; Purchases" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">5</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="-1827029976">accountId</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="-286489240">
+              <stringProp name="-275219345">${__Random(100000,999999,accountId)}</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">true</boolProp>
+        </UserParameters>
+        <hashTree/>
+        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - Record" enabled="true">
+          <stringProp name="kafkaProducerClientVariableName">KafkaCustomerProducerClient</stringProp>
+          <stringProp name="kafkaTopic">retail.customers</stringProp>
+          <stringProp name="partitionString"></stringProp>
+          <stringProp name="kafkaMessageKey">${accountId}</stringProp>
+          <stringProp name="kafkaMessage">{
+  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,
+  &quot;AccountID&quot;: &quot;${accountId}&quot;,
+  &quot;AmpClientId&quot;: &quot;&quot;,
+  &quot;FirstName&quot;: &quot;${__changeCase(${__V(${given})},CAPITALIZE,)}&quot;,
+  &quot;MiddleName&quot;: &quot;${__RandomString(1,ABCDEFGHIJKLMNOPQRSTUVWXYZ)}&quot;,
+  &quot;LastName&quot;: &quot;${__changeCase(${__V(${family})},CAPITALIZE,)}&quot;,
+  &quot;Gender&quot;: &quot;${__RandomString(1,MFU)}&quot;,
+  &quot;Email&quot;: &quot;${__changeCase(${__V(${given})}${__V(${family})},LOWER,)}${__Random(1,99)}@${__RandomString(10,aaabcdeeeeefghiiijklmnoooprstuuuvwy)}.com&quot;,
+  &quot;PrimaryPhone&quot;: &quot;${__Random(100,999)}-${__Random(100,999)}-${__Random(1000,9999)}&quot;,
+  &quot;PrimaryPhoneValidity&quot;: &quot;&quot;,
+  &quot;BirthMonth&quot;: &quot;&quot;,
+  &quot;BirthYear&quot;: &quot;&quot;,
+  &quot;BirthDay&quot;: &quot;&quot;,
+  &quot;Age&quot;: &quot;&quot;,
+  &quot;BirthDate&quot;: &quot;&quot;,
+  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
+  &quot;DateModified&quot;: &quot;${__time(yyyy/MM/dd,)}&quot;,
+  &quot;MobileAdvertisingId&quot;: &quot;&quot;,
+  &quot;MobileDeviceId&quot;: &quot;${__RandomString(8,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}&quot;,
+  &quot;DoNotEmail&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+  &quot;DoNotCall&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+  &quot;DoNotText&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+  &quot;DoNotMail&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+  &quot;Company&quot;: &quot;&quot;,
+  &quot;Cookie&quot;: &quot;&quot;,
+  &quot;DeleteFlag&quot;: &quot;&quot;,
+  &quot;EmailOptInDate&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
+  &quot;EmailOptOutDate&quot;: &quot;&quot;,
+  &quot;FacebookID&quot;: &quot;&quot;,
+  &quot;NameCodes&quot;: &quot;&quot;,
+  &quot;PhoneValidationResultCodes&quot;: &quot;&quot;,
+  &quot;SourceAccountNumber&quot;: &quot;&quot;,
+  &quot;State&quot;: &quot;${state}&quot;,
+  &quot;UUID&quot;: &quot;${__UUID()}&quot;,
+  &quot;WebAccountID&quot;: &quot;&quot;,
+  &quot;TwitterID&quot;: &quot;&quot;
+}</stringProp>
+          <collectionProp name="messageHeaders"/>
+        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+        <hashTree/>
+        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - Address" enabled="true">
+          <stringProp name="kafkaProducerClientVariableName">KafkaCustomerProducerClient</stringProp>
+          <stringProp name="kafkaTopic">retail.addresses</stringProp>
+          <stringProp name="partitionString"></stringProp>
+          <stringProp name="kafkaMessageKey">${addressId}</stringProp>
+          <stringProp name="kafkaMessage">{
+  &quot;SourceAddressNumber&quot;: &quot;SAN-${__Random(100000,999999,addressId)}&quot;,
+  &quot;AddressType&quot;:&quot;${__RandomString(1,HWU)}&quot;,
+  &quot;Address1&quot;: &quot;${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}&quot;, 
+  &quot;Address2&quot;: &quot;&quot;,
+  &quot;City&quot;: &quot;${__changeCase(${__V(${city})},CAPITALIZE,)}&quot;,
+  &quot;Zip&quot;: &quot;${zip}&quot;,
+  &quot;ZipExt&quot;: &quot;&quot;,
+  &quot;State&quot;: &quot;${state}&quot;,
+  &quot;Country&quot;: &quot;United States&quot;,
+  &quot;CountryCode&quot;: &quot;US&quot;,
+  &quot;CarrierRoute&quot;: &quot;&quot;,
+  &quot;Certified&quot;: &quot;&quot;,
+  &quot;CMRA&quot;: &quot;&quot;,
+  &quot;DateCertified&quot;: &quot;&quot;,
+  &quot;DeleteFlag&quot;: &quot;N&quot;,
+  &quot;DeliveryPointCheckDigit&quot;: &quot;&quot;,
+  &quot;DeliveryPointCode&quot;: &quot;&quot;,
+  &quot;DpvConfirm&quot;: &quot;&quot;,
+  &quot;ErrorCode&quot;: &quot;&quot;,
+  &quot;ErrorString&quot;: &quot;&quot;,
+  &quot;LACS&quot;: &quot;&quot;,
+  &quot;Latitude&quot;: &quot;&quot;,
+  &quot;Longitude&quot;: &quot;&quot;,
+  &quot;MatchFlag&quot;: &quot;&quot;,
+  &quot;MoveDate&quot;: &quot;&quot;,
+  &quot;MoveType&quot;: &quot;&quot;,
+  &quot;NCOADateModified&quot;: &quot;&quot;,
+  &quot;NCOADateUpdate&quot;: &quot;&quot;,
+  &quot;RBDI&quot;: &quot;&quot;
+}</stringProp>
+          <collectionProp name="messageHeaders"/>
+        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+        <hashTree/>
+        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - AddressXRef" enabled="true">
+          <stringProp name="kafkaProducerClientVariableName">KafkaCustomerProducerClient</stringProp>
+          <stringProp name="kafkaTopic">retail.customers.addresses</stringProp>
+          <stringProp name="partitionString"></stringProp>
+          <stringProp name="kafkaMessageKey">${accountId}-${addressId}</stringProp>
+          <stringProp name="kafkaMessage">{
+  &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+}</stringProp>
+          <collectionProp name="messageHeaders"/>
+        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+        <hashTree/>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - Record Sampler" enabled="false">
+          <boolProp name="WAITING">false</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">{
+  &quot;SourceCustomerNumber&quot;: &quot;SCN-${__Random(100000,999999,accountId)}&quot;,
+  &quot;AccountID&quot;: &quot;${accountId}&quot;,
+  &quot;AmpClientId&quot;: &quot;&quot;,
+  &quot;FirstName&quot;: &quot;${__changeCase(${__V(${given})},CAPITALIZE,)}&quot;,
+  &quot;MiddleName&quot;: &quot;${__RandomString(1,ABCDEFGHIJKLMNOPQRSTUVWXYZ)}&quot;,
+  &quot;LastName&quot;: &quot;${__changeCase(${__V(${family})},CAPITALIZE,)}&quot;,
+  &quot;Gender&quot;: &quot;${__RandomString(1,MFU)}&quot;,
+  &quot;Email&quot;: &quot;${__changeCase(${__V(${given})}${__V(${family})},LOWER,)}${__Random(1,99)}@${__RandomString(10,aaabcdeeeeefghiiijklmnoooprstuuuvwy)}.com&quot;,
+  &quot;PrimaryPhone&quot;: &quot;${__Random(100,999)}-${__Random(100,999)}-${__Random(1000,9999)}&quot;,
+  &quot;PrimaryPhoneValidity&quot;: &quot;&quot;,
+  &quot;BirthMonth&quot;: &quot;&quot;,
+  &quot;BirthYear&quot;: &quot;&quot;,
+  &quot;BirthDay&quot;: &quot;&quot;,
+  &quot;Age&quot;: &quot;&quot;,
+  &quot;BirthDate&quot;: &quot;&quot;,
+  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
+  &quot;DateModified&quot;: &quot;${__time(yyyy/MM/dd,)}&quot;,
+  &quot;MobileAdvertisingId&quot;: &quot;&quot;,
+  &quot;MobileDeviceId&quot;: &quot;${__RandomString(8,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}&quot;,
+  &quot;DoNotEmail&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+  &quot;DoNotCall&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+  &quot;DoNotText&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+  &quot;DoNotMail&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+  &quot;Company&quot;: &quot;&quot;,
+  &quot;Cookie&quot;: &quot;&quot;,
+  &quot;DeleteFlag&quot;: &quot;&quot;,
+  &quot;EmailOptInDate&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
+  &quot;EmailOptOutDate&quot;: &quot;&quot;,
+  &quot;FacebookID&quot;: &quot;&quot;,
+  &quot;NameCodes&quot;: &quot;&quot;,
+  &quot;PhoneValidationResultCodes&quot;: &quot;&quot;,
+  &quot;SourceAccountNumber&quot;: &quot;&quot;,
+  &quot;State&quot;: &quot;${state}&quot;,
+  &quot;UUID&quot;: &quot;${__UUID()}&quot;,
+  &quot;WebAccountID&quot;: &quot;&quot;,
+  &quot;TwitterID&quot;: &quot;&quot;
+}</stringProp>
+          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree/>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - Address Sampler" enabled="false">
+          <boolProp name="WAITING">false</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">{
+  &quot;SourceAddressNumber&quot;: &quot;SAN-${__Random(100000,999999,addressId)}&quot;,
+  &quot;AddressType&quot;:&quot;${__RandomString(1,HWU)}&quot;,
+  &quot;Address1&quot;: &quot;${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}&quot;, 
+  &quot;Address2&quot;: &quot;&quot;,
+  &quot;City&quot;: &quot;${__changeCase(${__V(${city})},CAPITALIZE,)}&quot;,
+  &quot;Zip&quot;: &quot;${zip}&quot;,
+  &quot;ZipExt&quot;: &quot;&quot;,
+  &quot;State&quot;: &quot;${state}&quot;,
+  &quot;Country&quot;: &quot;United States&quot;,
+  &quot;CountryCode&quot;: &quot;US&quot;,
+  &quot;CarrierRoute&quot;: &quot;&quot;,
+  &quot;Certified&quot;: &quot;&quot;,
+  &quot;CMRA&quot;: &quot;&quot;,
+  &quot;DateCertified&quot;: &quot;&quot;,
+  &quot;DeleteFlag&quot;: &quot;N&quot;,
+  &quot;DeliveryPointCheckDigit&quot;: &quot;&quot;,
+  &quot;DeliveryPointCode&quot;: &quot;&quot;,
+  &quot;DpvConfirm&quot;: &quot;&quot;,
+  &quot;ErrorCode&quot;: &quot;&quot;,
+  &quot;ErrorString&quot;: &quot;&quot;,
+  &quot;LACS&quot;: &quot;&quot;,
+  &quot;Latitude&quot;: &quot;&quot;,
+  &quot;Longitude&quot;: &quot;&quot;,
+  &quot;MatchFlag&quot;: &quot;&quot;,
+  &quot;MoveDate&quot;: &quot;&quot;,
+  &quot;MoveType&quot;: &quot;&quot;,
+  &quot;NCOADateModified&quot;: &quot;&quot;,
+  &quot;NCOADateUpdate&quot;: &quot;&quot;,
+  &quot;RBDI&quot;: &quot;&quot;
+}</stringProp>
+          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree/>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - AddressXRef Sampler" enabled="false">
+          <boolProp name="WAITING">false</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">{
+  &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+}</stringProp>
+          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Purchase Transaction" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <FloatProperty>
+            <name>ThroughputController.percentThroughput</name>
+            <value>10.0</value>
+            <savedValue>0.0</savedValue>
+          </FloatProperty>
+          <stringProp name="TestPlan.comments">Limited to a percentage of total customer leads</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txOrg" enabled="true">
+            <stringProp name="TestPlan.comments">Pick random store; 85 in total</stringProp>
+            <stringProp name="variableName">txOrg</stringProp>
+            <stringProp name="outputFormat"></stringProp>
+            <stringProp name="minimumValue">1</stringProp>
+            <stringProp name="maximumValue">85</stringProp>
+            <stringProp name="randomSeed"></stringProp>
+            <boolProp name="perThread">true</boolProp>
+          </RandomVariableConfig>
+          <hashTree/>
+          <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txCount" enabled="true">
+            <stringProp name="TestPlan.comments">Number of items in this transaction</stringProp>
+            <stringProp name="variableName">txCount</stringProp>
+            <stringProp name="outputFormat"></stringProp>
+            <stringProp name="minimumValue">1</stringProp>
+            <stringProp name="maximumValue">8</stringProp>
+            <stringProp name="randomSeed"></stringProp>
+            <boolProp name="perThread">true</boolProp>
+          </RandomVariableConfig>
+          <hashTree/>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
+            <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
+            <stringProp name="cacheKey">false</stringProp>
+            <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/transaction.gs</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script"></stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - Transaction" enabled="true">
+            <stringProp name="kafkaProducerClientVariableName">KafkaCustomerProducerClient</stringProp>
+            <stringProp name="kafkaTopic">retail.pos.transaction</stringProp>
+            <stringProp name="partitionString"></stringProp>
+            <stringProp name="kafkaMessageKey">${txId}</stringProp>
+            <stringProp name="kafkaMessage">{
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${__Random(1000000,9999999,txId)}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
+  &quot;Type&quot;: &quot;Purchase&quot;,
+  &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+}</stringProp>
+            <collectionProp name="messageHeaders"/>
+          </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+          <hashTree/>
+          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - Transaction Sampler" enabled="false">
+            <boolProp name="WAITING">false</boolProp>
+            <boolProp name="SUCCESFULL">true</boolProp>
+            <stringProp name="RESPONSE_CODE">200</stringProp>
+            <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+            <stringProp name="REQUEST_DATA">{
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${__Random(1000000,9999999,txId)}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
+  &quot;Type&quot;: &quot;Purchase&quot;,
+  &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+}</stringProp>
+            <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+            <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+            <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+            <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+            <stringProp name="URL"></stringProp>
+            <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+          </kg.apc.jmeter.samplers.DummySampler>
+          <hashTree/>
+          <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Transaction Items" enabled="true">
+            <boolProp name="LoopController.continue_forever">true</boolProp>
+            <stringProp name="LoopController.loops">${txCount}</stringProp>
+          </LoopController>
+          <hashTree>
+            <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - Transaction Item" enabled="true">
+              <stringProp name="kafkaProducerClientVariableName">KafkaCustomerProducerClient</stringProp>
+              <stringProp name="kafkaTopic">retail.pos.transaction.item</stringProp>
+              <stringProp name="partitionString"></stringProp>
+              <stringProp name="kafkaMessageKey">${txId}</stringProp>
+              <stringProp name="kafkaMessage">{
+  &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
+  &quot;Subtype&quot;: &quot;Purchase&quot;,
+  &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
+  &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;ListPrice&quot;: &quot;${mockValues.txPricePerItem}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;SaleRevenue&quot;: &quot;${mockValues.txRevenuePerItem}&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;CostBasis&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTaxPerItem}&quot;,
+  &quot;ShipDate&quot;: &quot;&quot;,  
+  &quot;ShippingRevenue&quot;: &quot;&quot;,
+  &quot;ShippingCost&quot;: &quot;&quot;,
+  &quot;ShippingDiscount&quot;: &quot;&quot;,
+  &quot;OtherRevenue&quot;: &quot;&quot;,
+  &quot;OtherCosts&quot;: &quot;&quot;,
+  &quot;DateCreated&quot;: &quot;${txDate}&quot;,
+  &quot;Gift&quot;: &quot;${__RandomString(1,YN)}&quot;
+}</stringProp>
+              <collectionProp name="messageHeaders"/>
+            </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+            <hashTree/>
+            <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - Transaction Item Sampler" enabled="false">
+              <boolProp name="WAITING">false</boolProp>
+              <boolProp name="SUCCESFULL">true</boolProp>
+              <stringProp name="RESPONSE_CODE">200</stringProp>
+              <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+              <stringProp name="REQUEST_DATA">{
+  &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
+  &quot;Subtype&quot;: &quot;Purchase&quot;,
+  &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
+  &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;ListPrice&quot;: &quot;${mockValues.txPricePerItem}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;SaleRevenue&quot;: &quot;${mockValues.txRevenuePerItem}&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;CostBasis&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTaxPerItem}&quot;,
+  &quot;ShipDate&quot;: &quot;&quot;,  
+  &quot;ShippingRevenue&quot;: &quot;&quot;,
+  &quot;ShippingCost&quot;: &quot;&quot;,
+  &quot;ShippingDiscount&quot;: &quot;&quot;,
+  &quot;OtherRevenue&quot;: &quot;&quot;,
+  &quot;OtherCosts&quot;: &quot;&quot;,
+  &quot;DateCreated&quot;: &quot;${txDate}&quot;,
+  &quot;Gift&quot;: &quot;${__RandomString(1,YN)}&quot;
+}</stringProp>
+              <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+              <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+              <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+              <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+              <stringProp name="URL"></stringProp>
+              <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+            </kg.apc.jmeter.samplers.DummySampler>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">300</stringProp>
+          <stringProp name="RandomTimer.range">20000</stringProp>
+        </GaussianRandomTimer>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Anon Purchases" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txOrg" enabled="true">
+          <stringProp name="TestPlan.comments">Pick random store; 85 in total</stringProp>
+          <stringProp name="variableName">txOrg</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="maximumValue">85</stringProp>
+          <stringProp name="randomSeed"></stringProp>
+          <boolProp name="perThread">true</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate txCount" enabled="true">
+          <stringProp name="TestPlan.comments">Number of items in this transaction</stringProp>
+          <stringProp name="variableName">txCount</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="maximumValue">8</stringProp>
+          <stringProp name="randomSeed"></stringProp>
+          <boolProp name="perThread">true</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Transaction Values" enabled="true">
+          <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/transaction.gs</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script"></stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - Transaction Sampler" enabled="false">
+          <boolProp name="WAITING">false</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">{
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
+  &quot;Type&quot;: &quot;Purchase&quot;,
+  &quot;TransactionTimeStamp&quot;: &quot;${txDate} ${txTime}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;&quot;
+}</stringProp>
+          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree/>
+        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - Transaction" enabled="true">
+          <stringProp name="kafkaProducerClientVariableName">KafkaTransactionsProducerClient</stringProp>
+          <stringProp name="kafkaTopic">retail.pos.transaction</stringProp>
+          <stringProp name="partitionString"></stringProp>
+          <stringProp name="kafkaMessageKey">${txId}</stringProp>
+          <stringProp name="kafkaMessage">{
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${__Random(1000000,9999999,txId)}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
+  &quot;Type&quot;: &quot;Purchase&quot;,
+  &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;&quot;
+}</stringProp>
+          <collectionProp name="messageHeaders"/>
+        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+        <hashTree/>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Transaction Items" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${txCount}</stringProp>
+        </LoopController>
+        <hashTree>
+          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Customer - Transaction Item Sampler" enabled="false">
+            <boolProp name="WAITING">false</boolProp>
+            <boolProp name="SUCCESFULL">true</boolProp>
+            <stringProp name="RESPONSE_CODE">200</stringProp>
+            <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+            <stringProp name="REQUEST_DATA">{
+  &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
+  &quot;Subtype&quot;: &quot;Purchase&quot;,
+  &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
+  &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;ListPrice&quot;: &quot;${mockValues.txPricePerItem}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;SaleRevenue&quot;: &quot;${mockValues.txRevenuePerItem}&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;CostBasis&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTaxPerItem}&quot;,
+  &quot;ShipDate&quot;: &quot;&quot;,  
+  &quot;ShippingRevenue&quot;: &quot;&quot;,
+  &quot;ShippingCost&quot;: &quot;&quot;,
+  &quot;ShippingDiscount&quot;: &quot;&quot;,
+  &quot;OtherRevenue&quot;: &quot;&quot;,
+  &quot;OtherCosts&quot;: &quot;&quot;,
+  &quot;DateCreated&quot;: &quot;${txDate}&quot;,
+  &quot;Gift&quot;: &quot;${__RandomString(1,YN)}&quot;
+}</stringProp>
+            <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+            <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+            <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+            <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+            <stringProp name="URL"></stringProp>
+            <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+          </kg.apc.jmeter.samplers.DummySampler>
+          <hashTree/>
+          <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Customer - Transaction Item" enabled="true">
+            <stringProp name="kafkaProducerClientVariableName">KafkaTransactionsProducerClient</stringProp>
+            <stringProp name="kafkaTopic">retail.pos.transaction.item</stringProp>
+            <stringProp name="partitionString"></stringProp>
+            <stringProp name="kafkaMessageKey">${txId}</stringProp>
+            <stringProp name="kafkaMessage">{
+  &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;Type&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
+  &quot;Subtype&quot;: &quot;Purchase&quot;,
+  &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
+  &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
+  &quot;ListPrice&quot;: &quot;${mockValues.txPricePerItem}&quot;,
+  &quot;Currency&quot;: &quot;USD&quot;,
+  &quot;SaleRevenue&quot;: &quot;${mockValues.txRevenuePerItem}&quot;,
+  &quot;Discount&quot;: &quot;&quot;,
+  &quot;CostBasis&quot;: &quot;&quot;,
+  &quot;Tax&quot;: &quot;${mockValues.txTaxPerItem}&quot;,
+  &quot;ShipDate&quot;: &quot;&quot;,  
+  &quot;ShippingRevenue&quot;: &quot;&quot;,
+  &quot;ShippingCost&quot;: &quot;&quot;,
+  &quot;ShippingDiscount&quot;: &quot;&quot;,
+  &quot;OtherRevenue&quot;: &quot;&quot;,
+  &quot;OtherCosts&quot;: &quot;&quot;,
+  &quot;DateCreated&quot;: &quot;${txDate}&quot;,
+  &quot;Gift&quot;: &quot;${__RandomString(1,YN)}&quot;
+}</stringProp>
+            <collectionProp name="messageHeaders"/>
+          </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+          <hashTree/>
+        </hashTree>
+        <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">300</stringProp>
+          <stringProp name="RandomTimer.range">2000</stringProp>
+        </GaussianRandomTimer>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Populate Products List" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">56000</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">5</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">300</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+        <stringProp name="TestPlan.comments">Create products list acting as a PIM client</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Product Values" enabled="true">
+          <stringProp name="TestPlan.comments">Create random categories and values to populate products and prices with discounts that can match with our clickstream later.</stringProp>
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/functions/product.gs</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script"></stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Product Sampler" enabled="false">
+          <boolProp name="WAITING">false</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">{
+  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
+  &quot;Name&quot;: &quot;${product_name}&quot;,
+  &quot;ProductURL&quot;: &quot;https://pim.marketingco.io/${product_id}&quot;,
+  &quot;BrandName&quot;: &quot;${mockValues.productBrand}&quot;,
+  &quot;ListPrice&quot;: &quot;${mockValues.productPrice}&quot;,
+  &quot;SalePrice&quot;: &quot;${mockValues.productSalePrice}&quot;,
+  &quot;Availability&quot;: &quot;${mockValues.productAvail}&quot;,
+  &quot;AvailableQty&quot;: &quot;${__Random(1,85,)}&quot;,
+  &quot;RecoStatus&quot;: &quot;${__RandomString(1,YN)}&quot;,
+  &quot;Size&quot;: &quot;${__RandomString(1,SML)}&quot;,
+  &quot;Color&quot;: &quot;${mockValues.productColor}&quot;,
+  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,
+  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
+  &quot;Custom attributes&quot;: &quot;&quot;
+}</stringProp>
+          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree/>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Products - See Mock Product Data" enabled="false">
+          <boolProp name="WAITING">false</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">${mockValues.productColor}
+${mockValues.productAvail}
+${mockValues.productBrand}
+${mockValues.productCondition}
+${mockValues.productCategory}
+${mockValues.productCategoryCode}
+
+${mockValues.productPrice}
+${mockValues.productSalePrice}</stringProp>
+          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+          <stringProp name="TestPlan.comments">Enable this to make sure your code is generating the right values</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree/>
+        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Producer - Product" enabled="true">
+          <stringProp name="kafkaProducerClientVariableName">KafkaProductProducerClient</stringProp>
+          <stringProp name="kafkaTopic">retail.products</stringProp>
+          <stringProp name="partitionString"></stringProp>
+          <stringProp name="kafkaMessageKey">${product_id}</stringProp>
+          <stringProp name="kafkaMessage">{
+  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
+  &quot;Name&quot;: &quot;${product_name}&quot;,
+  &quot;ProductURL&quot;: &quot;https://pim.marketingco.io/${product_id}&quot;,
+  &quot;BrandName&quot;: &quot;${mockValues.productBrand}&quot;,
+  &quot;ListPrice&quot;: &quot;${mockValues.productPrice}&quot;,
+  &quot;SalePrice&quot;: &quot;${mockValues.productSalePrice}&quot;,
+  &quot;Availability&quot;: &quot;${mockValues.productAvail}&quot;,
+  &quot;AvailableQty&quot;: &quot;${__Random(1,85,)}&quot;,
+  &quot;RecoStatus&quot;: &quot;${__RandomString(1,YN)}&quot;,
+  &quot;Size&quot;: &quot;${__RandomString(1,SML)}&quot;,
+  &quot;Color&quot;: &quot;${mockValues.productColor}&quot;,
+  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,49,)}&quot;,
+  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
+  &quot;Custom attributes&quot;: &quot;&quot;
+}</stringProp>
+          <collectionProp name="messageHeaders"/>
+        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Populate Store Organization List" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">stoptest</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">85</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+        <stringProp name="TestPlan.comments">&quot;Organization&quot; in the data model</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Produce - Test Organization Sampler" enabled="false">
+          <boolProp name="WAITING">false</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">{
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${store_id}&quot;,
+  &quot;Name&quot;: &quot;${store_name}&quot;,
+  &quot;Status&quot;: &quot;Open&quot;,
+  &quot;Type&quot;: &quot;${__RandomString(1,DPWO)}&quot;,
+  &quot;Country&quot;: &quot;US&quot;,
+  &quot;State&quot;: &quot;${store_state}&quot;,
+  &quot;City&quot;: &quot;${store_city}&quot;,
+  &quot;Address1&quot;: &quot;${store_street_address}&quot;,
+  &quot;Address2&quot;: &quot;&quot;,
+  &quot;Zip&quot;: &quot;${store_zip}&quot;,
+  &quot;ExcludeAsClosestStore&quot;: &quot;N&quot;,
+  &quot;Phone&quot;: &quot;${store_phone}&quot;,
+  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2008/08/07,2022/04/20,,)}&quot;
+}</stringProp>
+          <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree/>
+        <com.di.jmeter.kafka.sampler.KafkaProducerSampler guiclass="TestBeanGUI" testclass="com.di.jmeter.kafka.sampler.KafkaProducerSampler" testname="Produce - Organization - Record" enabled="false">
+          <stringProp name="kafkaProducerClientVariableName">KafkaOrganizationProducerClient</stringProp>
+          <stringProp name="kafkaTopic">retail.organizations</stringProp>
+          <stringProp name="partitionString"></stringProp>
+          <stringProp name="kafkaMessageKey">${store_id}</stringProp>
+          <stringProp name="kafkaMessage">{
+  &quot;SourceOrganizationNumber&quot;: &quot;SON-${store_id}&quot;,
+  &quot;Name&quot;: &quot;${store_name}&quot;,
+  &quot;Status&quot;: &quot;Open&quot;,
+  &quot;Type&quot;: &quot;${__RandomString(1,DPWO)}&quot;,
+  &quot;Country&quot;: &quot;US&quot;,
+  &quot;State&quot;: &quot;${store_state}&quot;,
+  &quot;City&quot;: &quot;${store_city}&quot;,
+  &quot;Address1&quot;: &quot;${store_street_address}&quot;,
+  &quot;Address2&quot;: &quot;&quot;,
+  &quot;Zip&quot;: &quot;${store_zip}&quot;,
+  &quot;ExcludeAsClosestStore&quot;: &quot;N&quot;,
+  &quot;Phone&quot;: &quot;${store_phone}&quot;,
+  &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2008/08/07,2022/04/20,,)}&quot;
+}</stringProp>
+          <collectionProp name="messageHeaders"/>
+        </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
+        <hashTree/>
+      </hashTree>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Modules" enabled="false">
+        <stringProp name="TestPlan.comments">If you want to be DRY, put commonly-used elements in modules. Use the &quot;module controller&quot; to call them from a thread.</stringProp>
+      </TestFragmentController>
+      <hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Transaction" enabled="false"/>
+        <hashTree/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Search" enabled="false"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Homepage - ${DOMAIN}" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${DOMAIN}</stringProp>
+            <stringProp name="HTTPSampler.port">${PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.image_parser">true</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+              <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
+              <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+            </GaussianRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Search - ${DOMAIN}" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${DOMAIN}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/${language}/search/${search_site}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.image_parser">true</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HtmlExtractor guiclass="HtmlExtractorGui" testclass="HtmlExtractor" testname="CSS/JQuery Extractor" enabled="true">
+              <stringProp name="HtmlExtractor.refname">search_result_link</stringProp>
+              <stringProp name="HtmlExtractor.expr">.views-field-title a</stringProp>
+              <stringProp name="HtmlExtractor.attribute">href</stringProp>
+              <stringProp name="HtmlExtractor.default"></stringProp>
+              <stringProp name="HtmlExtractor.match_number">0</stringProp>
+              <stringProp name="HtmlExtractor.extractor_impl"></stringProp>
+              <boolProp name="HtmlExtractor.default_empty_value">false</boolProp>
+            </HtmlExtractor>
+            <hashTree/>
+            <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+              <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
+              <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+            </GaussianRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Internal Link" enabled="true">
+            <stringProp name="TestPlan.comments">Check if the link returned is a relative link or an external link</stringProp>
+            <stringProp name="IfController.condition">&quot;${search_result_link}&quot;[0] == &quot;/&quot;</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Random Search Result - ${DOMAIN}" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${DOMAIN}</stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${search_result_link}</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">${WAIT.MEDIUM}</stringProp>
+                <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+              </GaussianRandomTimer>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>true</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <hostname>true</hostname>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+        <stringProp name="TestPlan.comments">Listeners can affect performance, so enable with care.</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
