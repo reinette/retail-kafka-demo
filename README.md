@@ -2,7 +2,7 @@
 
 This repo will let you spin up jMeter and begin sending Kafka produce calls and REST Produce calls to a Confluent Kafka cluster. What I have here is just a start -- adjust as you need, but this will work out of the box to give you an idea of the power of jMeter to help during load testing, data modelling, and local API development.
 
-There are many tools online that do a lot of the parts of the tests, like Postman collections for mocking up request flows, but there's something to be said for having all your scenarios all in one place. The benefit of jMeter is that you can be very specific about throughputs and weights of different scenarios; for actual load testing, you can also run it headless -- there are services like jMeter you can leverage for testing at enterprise scale across a fleet of containers.
+There are many tools online that do a lot of the parts of the tests, like Postman collections for mocking up request flows, but there's something to be said for having all your scenarios all in one place including Kafka producers/consumers and other data sources like MQTT or SFTP. The other benefit of jMeter is that you can be very specific about throughputs and weights of different scenarios; for actual load testing, you can also run it headless -- there are services like jMeter you can leverage for testing at enterprise scale across a fleet of containers.
 
 ## Install jMeter:
 
