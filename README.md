@@ -19,6 +19,7 @@ Also requires jMeter plugin manager: https://jmeter-plugins.org/. Grab the follo
 * Kafka Support
 * Kafka backend listener
 * jpgc - Standard Set
+* Random CSV Data Set Config
 
 There are also plugins for mocking MQTT, Elastic, Mongo, JDPC, and FTP data sources. It's fun, check it out!
 
