@@ -1,5 +1,5 @@
 {
-  "SourceProductNumber": "SPN-${product_id}",
+  "SourceProductNumber": "${product_id}",
   "Name": "${product_name}",
   "ProductURL": "https://pim.marketingco.io/${product_id}",
   "BrandName": "${mockValues.productBrand}",

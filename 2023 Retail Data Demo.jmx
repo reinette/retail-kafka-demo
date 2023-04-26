@@ -638,6 +638,80 @@
           </UserParameters>
           <hashTree/>
         </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Martech Event" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+  &quot;partition_id&quot;: null,&#xd;
+  &quot;headers&quot;: [],&#xd;
+  &quot;key&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;&#xd;
+  },&#xd;
+  &quot;value&quot;: {&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+	  &quot;Cookie&quot;: &quot;&quot;,&#xd;
+	  &quot;EventType&quot;:&quot;${mockValues.eventType}&quot;,&#xd;
+	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
+	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
+	  &quot;Email&quot;: &quot;${email}&quot;,&#xd;
+	  &quot;Referer&quot;: &quot;&quot;,&#xd;
+	  &quot;URL&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,&#xd;
+	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
+	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,&#xd;
+	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
+	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,&#xd;
+	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,&#xd;
+	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
+          <stringProp name="HTTPSampler.port">443</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/web.events/records</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="TestPlan.comments">Post an event using the Confluent Cloud REST Produce</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
+            <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
+          </GaussianRandomTimer>
+          <hashTree/>
+        </hashTree>
         <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="[Post] Martech Event - Test Sampler" enabled="false">
           <boolProp name="WAITING">true</boolProp>
           <boolProp name="SUCCESFULL">true</boolProp>
@@ -654,16 +728,16 @@
     &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: {
 	  &quot;Cookie&quot;: &quot;&quot;,
-	  &quot;Type&quot;:&quot;${mockdata.eventType}&quot;,
+	  &quot;EventType&quot;:&quot;${mockValues.eventType}&quot;,
 	  &quot;Subtype&quot;: &quot;&quot;,
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
 	  &quot;Email&quot;: &quot;${email}&quot;,
 	  &quot;Referer&quot;: &quot;&quot;,
 	  &quot;URL&quot;: &quot;&quot;,
-	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,
+	  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,
 	  &quot;SourceMessageNumber&quot;: &quot;&quot;,
-	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
-	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,
+	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,
+	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,
 	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,
 	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,
 	  &quot;UserClient&quot;: &quot;&quot;,
@@ -791,80 +865,6 @@ try {
 }</stringProp>
             <stringProp name="scriptLanguage">groovy</stringProp>
           </JSR223PostProcessor>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Martech Event" enabled="true">
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&#xd;
-  &quot;partition_id&quot;: null,&#xd;
-  &quot;headers&quot;: [],&#xd;
-  &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;JSON&quot;,&#xd;
-    &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;&#xd;
-  },&#xd;
-  &quot;value&quot;: {&#xd;
-    &quot;type&quot;: &quot;JSON&quot;,&#xd;
-    &quot;data&quot;: {&#xd;
-	  &quot;Cookie&quot;: &quot;&quot;,&#xd;
-	  &quot;EventType&quot;:&quot;${mockValues.eventType}&quot;,&#xd;
-	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
-	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
-	  &quot;Email&quot;: &quot;${email}&quot;,&#xd;
-	  &quot;Referer&quot;: &quot;&quot;,&#xd;
-	  &quot;URL&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,&#xd;
-	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
-	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
-	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
-	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,&#xd;
-	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
-	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,&#xd;
-	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,&#xd;
-	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;&#xd;
-    }&#xd;
-  }&#xd;
-}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
-          <stringProp name="HTTPSampler.port">443</stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/kafka/v3/clusters/${CLUSTER_ID}/topics/web.events/records</stringProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
-          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="TestPlan.comments">Post an event using the Confluent Cloud REST Produce</stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-            <boolProp name="Assertion.assume_success">false</boolProp>
-            <intProp name="Assertion.test_type">8</intProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-          </ResponseAssertion>
-          <hashTree/>
-          <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="false">
-            <stringProp name="ConstantTimer.delay">${OFFSET.LONG}</stringProp>
-            <stringProp name="RandomTimer.range">${WAIT.MEDIUM}</stringProp>
-          </GaussianRandomTimer>
           <hashTree/>
         </hashTree>
         <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="jMeter Variable Debug Sampler" enabled="false">
@@ -1014,7 +1014,7 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
+	  &quot;Cookie&quot;: &quot;${cookie}&quot;,&#xd;
 	  &quot;EventType&quot;:&quot;categoryBrowsed&quot;,&#xd;
 	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
@@ -1023,8 +1023,8 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
 	  &quot;URL&quot;: &quot;&quot;,&#xd;
 	  &quot;SourceCustomerNumber&quot;: &quot;&quot;,&#xd;
 	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
-	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,&#xd;
 	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
 	  &quot;SearchTerm&quot;: &quot;&quot;,&#xd;
 	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
@@ -1075,14 +1075,14 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
   &quot;partition_id&quot;: null,
   &quot;headers&quot;: [],
   &quot;key&quot;: {
-    &quot;type&quot;: &quot;BINARY&quot;,
+    &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: &quot;ssid_web1_${cookie}&quot;
   },
   &quot;value&quot;: {
     &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: {
-	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,
-	  &quot;Type&quot;:&quot;${mockValues.eventType}&quot;,
+	  &quot;Cookie&quot;: &quot;${cookie}&quot;,
+	  &quot;EventType&quot;:&quot;categoryBrowsed&quot;,
 	  &quot;Subtype&quot;: &quot;&quot;,
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
 	  &quot;Email&quot;: &quot;&quot;,
@@ -1090,10 +1090,10 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
 	  &quot;URL&quot;: &quot;&quot;,
 	  &quot;SourceCustomerNumber&quot;: &quot;&quot;,
 	  &quot;SourceMessageNumber&quot;: &quot;&quot;,
-	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
-	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,
+	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,
+	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,
 	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,
-	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,
+	  &quot;SearchTerm&quot;: &quot;&quot;,
 	  &quot;UserClient&quot;: &quot;&quot;,
 	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,
 	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,
@@ -1247,7 +1247,7 @@ try {
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
+	  &quot;Cookie&quot;: &quot;${cookie}&quot;,&#xd;
 	  &quot;EventType&quot;:&quot;onsiteSearch&quot;,&#xd;
 	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
@@ -1256,8 +1256,8 @@ try {
 	  &quot;URL&quot;: &quot;&quot;,&#xd;
 	  &quot;SourceCustomerNumber&quot;: &quot;&quot;,&#xd;
 	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
-	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,&#xd;
 	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
 	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,&#xd;
 	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
@@ -1338,17 +1338,17 @@ try {
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
+	  &quot;Cookie&quot;: &quot;${cookie}&quot;,&#xd;
 	  &quot;EventType&quot;:&quot;checkout&quot;,&#xd;
 	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
 	  &quot;Email&quot;: &quot;${email}&quot;,&#xd;
 	  &quot;Referer&quot;: &quot;&quot;,&#xd;
 	  &quot;URL&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,&#xd;
+	  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,&#xd;
 	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
-	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,&#xd;
 	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
 	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,&#xd;
 	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
@@ -1411,17 +1411,17 @@ try {
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,&#xd;
+	  &quot;Cookie&quot;: &quot;${cookie}&quot;,&#xd;
 	  &quot;EventType&quot;:&quot;checkout&quot;,&#xd;
 	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
 	  &quot;Email&quot;: &quot;&quot;,&#xd;
 	  &quot;Referer&quot;: &quot;&quot;,&#xd;
 	  &quot;URL&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,&#xd;
+	  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,&#xd;
 	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,&#xd;
-	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,&#xd;
+	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,&#xd;
+	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,&#xd;
 	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
 	  &quot;SearchTerm&quot;: &quot;&quot;,&#xd;
 	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
@@ -1479,7 +1479,7 @@ try {
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-      &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,&#xd;
+      &quot;SourceAddressNumber&quot;: &quot;${addressId}&quot;,&#xd;
       &quot;AddressType&quot;:&quot;${__RandomString(1,HWU)}&quot;,&#xd;
       &quot;Address1&quot;: &quot;${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}&quot;, &#xd;
       &quot;Address2&quot;: &quot;&quot;,&#xd;
@@ -1559,13 +1559,13 @@ try {
   &quot;headers&quot;: [],&#xd;
   &quot;key&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
-    &quot;data&quot;: &quot;${accountId}-${addressId}&quot;&#xd;
+    &quot;data&quot;: &quot;${addressId}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-      &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,&#xd;
-      &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;&#xd;
+      &quot;SourceAddressNumber&quot;: &quot;${addressId}&quot;,&#xd;
+      &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;&#xd;
     }&#xd;
   }&#xd;
 }</stringProp>
@@ -1621,17 +1621,17 @@ try {
   &quot;value&quot;: {
     &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: {
-	  &quot;Cookie&quot;: &quot;ssid_web1_${cookie}&quot;,
+	  &quot;Cookie&quot;: &quot;${cookie}&quot;,
 	  &quot;EventType&quot;:&quot;checkout&quot;,
 	  &quot;Subtype&quot;: &quot;&quot;,
 	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
 	  &quot;Email&quot;: &quot;${email}&quot;,
 	  &quot;Referer&quot;: &quot;&quot;,
 	  &quot;URL&quot;: &quot;&quot;,
-	  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,
+	  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,
 	  &quot;SourceMessageNumber&quot;: &quot;&quot;,
-	  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
-	  &quot;SourceProductCategoryNumber&quot;: &quot;SPC-${__Random(1,44,)}&quot;,
+	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,
+	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,
 	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,
 	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,
 	  &quot;UserClient&quot;: &quot;&quot;,
@@ -1769,13 +1769,14 @@ try {
   &quot;partition_id&quot;: null,
   &quot;headers&quot;: [],
   &quot;key&quot;: {
-    &quot;type&quot;: &quot;BINARY&quot;,
+    &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: &quot;${__Random(100000,999999,addressId)}&quot;
   },
   &quot;value&quot;: {
     &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: {
-      &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,
+      &quot;SourceAddressNumber&quot;: &quot;${addressId}&quot;,
+      &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,      
       &quot;AddressType&quot;:&quot;${__RandomString(1,HWU)}&quot;,
       &quot;Address1&quot;: &quot;${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}&quot;, 
       &quot;Address2&quot;: &quot;&quot;,
@@ -1935,14 +1936,14 @@ try {
   &quot;partition_id&quot;: null,
   &quot;headers&quot;: [],
   &quot;key&quot;: {
-    &quot;type&quot;: &quot;BINARY&quot;,
-    &quot;data&quot;: &quot;${accountId}-${addressId}&quot;
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;data&quot;: &quot;${addressId}&quot;
   },
   &quot;value&quot;: {
     &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: {
-      &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,
-      &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+      &quot;SourceAddressNumber&quot;: &quot;${addressId}&quot;,
+      &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;
     }
   }
 }</stringProp>
@@ -2112,15 +2113,15 @@ try {
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-      &quot;SourceTransactionNumber&quot;: &quot;STN-${__Random(1000000,9999999,txId)}&quot;,&#xd;
-      &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,&#xd;
+      &quot;SourceTransactionNumber&quot;: &quot;${__Random(1000000,9999999,txId)}&quot;,&#xd;
+      &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,&#xd;
       &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,&#xd;
       &quot;Currency&quot;: &quot;USD&quot;,&#xd;
       &quot;Discount&quot;: &quot;&quot;,&#xd;
       &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,&#xd;
       &quot;EventType&quot;: &quot;Purchase&quot;,&#xd;
       &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
-      &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;&#xd;
+      &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;&#xd;
     }&#xd;
   }&#xd;
 }</stringProp>
@@ -2374,7 +2375,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="partitionString"></stringProp>
           <stringProp name="kafkaMessageKey">${accountId}</stringProp>
           <stringProp name="kafkaMessage">{
-  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,
   &quot;AccountID&quot;: &quot;${accountId}&quot;,
   &quot;AmpClientId&quot;: &quot;&quot;,
   &quot;FirstName&quot;: &quot;${__changeCase(${__V(${given})},CAPITALIZE,)}&quot;,
@@ -2420,7 +2421,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="partitionString"></stringProp>
           <stringProp name="kafkaMessageKey">${addressId}</stringProp>
           <stringProp name="kafkaMessage">{
-  &quot;SourceAddressNumber&quot;: &quot;SAN-${__Random(100000,999999,addressId)}&quot;,
+  &quot;SourceAddressNumber&quot;: &quot;${__Random(100000,999999,addressId)}&quot;,
   &quot;AddressType&quot;:&quot;${__RandomString(1,HWU)}&quot;,
   &quot;Address1&quot;: &quot;${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}&quot;, 
   &quot;Address2&quot;: &quot;&quot;,
@@ -2459,8 +2460,8 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="partitionString"></stringProp>
           <stringProp name="kafkaMessageKey">${accountId}-${addressId}</stringProp>
           <stringProp name="kafkaMessage">{
-  &quot;SourceAddressNumber&quot;: &quot;SAN-${addressId}&quot;,
-  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+  &quot;SourceAddressNumber&quot;: &quot;${addressId}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;
 }</stringProp>
           <collectionProp name="messageHeaders"/>
         </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
@@ -2471,7 +2472,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="RESPONSE_CODE">200</stringProp>
           <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
           <stringProp name="REQUEST_DATA">{
-  &quot;SourceCustomerNumber&quot;: &quot;SCN-${__Random(100000,999999,accountId)}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;${__Random(100000,999999,accountId)}&quot;,
   &quot;AccountID&quot;: &quot;${accountId}&quot;,
   &quot;AmpClientId&quot;: &quot;&quot;,
   &quot;FirstName&quot;: &quot;${__changeCase(${__V(${given})},CAPITALIZE,)}&quot;,
@@ -2523,7 +2524,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="RESPONSE_CODE">200</stringProp>
           <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
           <stringProp name="REQUEST_DATA">{
-  &quot;SourceAddressNumber&quot;: &quot;SAN-${__Random(100000,999999,addressId)}&quot;,
+  &quot;SourceAddressNumber&quot;: &quot;${__Random(100000,999999,addressId)}&quot;,
   &quot;AddressType&quot;:&quot;${__RandomString(1,HWU)}&quot;,
   &quot;Address1&quot;: &quot;${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}&quot;, 
   &quot;Address2&quot;: &quot;&quot;,
@@ -2627,15 +2628,15 @@ without actual network activity. This helps debugging tests.</stringProp>
             <stringProp name="partitionString"></stringProp>
             <stringProp name="kafkaMessageKey">${txId}</stringProp>
             <stringProp name="kafkaMessage">{
-  &quot;SourceTransactionNumber&quot;: &quot;STN-${__Random(1000000,9999999,txId)}&quot;,
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;${__Random(1000000,9999999,txId)}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,
   &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
   &quot;Currency&quot;: &quot;USD&quot;,
   &quot;Discount&quot;: &quot;&quot;,
   &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
   &quot;TransactionType&quot;: &quot;Purchase&quot;,
   &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
-  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;
 }</stringProp>
             <collectionProp name="messageHeaders"/>
           </com.di.jmeter.kafka.sampler.KafkaProducerSampler>
@@ -2646,15 +2647,15 @@ without actual network activity. This helps debugging tests.</stringProp>
             <stringProp name="RESPONSE_CODE">200</stringProp>
             <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
             <stringProp name="REQUEST_DATA">{
-  &quot;SourceTransactionNumber&quot;: &quot;STN-${__Random(1000000,9999999,txId)}&quot;,
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;${__Random(1000000,9999999,txId)}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,
   &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
   &quot;Currency&quot;: &quot;USD&quot;,
   &quot;Discount&quot;: &quot;&quot;,
   &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
   &quot;TransactionType&quot;: &quot;Purchase&quot;,
-  &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
-  &quot;SourceCustomerNumber&quot;: &quot;SCN-${accountId}&quot;
+  &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
+  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;
 }</stringProp>
             <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
 without actual network activity. This helps debugging tests.</stringProp>
@@ -2676,13 +2677,13 @@ without actual network activity. This helps debugging tests.</stringProp>
               <stringProp name="partitionString"></stringProp>
               <stringProp name="kafkaMessageKey">${txId}</stringProp>
               <stringProp name="kafkaMessage">{
-  &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
-  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;SourceTransactionItemNumber&quot;: &quot;${__Random(1000000,9999999,)}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,
   &quot;TransactionType&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
   &quot;Subtype&quot;: &quot;Purchase&quot;,
   &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
-  &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,
   &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
   &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
   &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
@@ -2710,13 +2711,13 @@ without actual network activity. This helps debugging tests.</stringProp>
               <stringProp name="RESPONSE_CODE">200</stringProp>
               <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
               <stringProp name="REQUEST_DATA">{
-  &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
-  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;SourceTransactionItemNumber&quot;: &quot;${__Random(1000000,9999999,)}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,
   &quot;TransactionType&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
   &quot;Subtype&quot;: &quot;Purchase&quot;,
   &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
-  &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,
   &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
   &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
   &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
@@ -2752,7 +2753,7 @@ without actual network activity. This helps debugging tests.</stringProp>
         </GaussianRandomTimer>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Anon Purchases" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Anon Purchases" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -2802,8 +2803,8 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="partitionString"></stringProp>
           <stringProp name="kafkaMessageKey">${txId}</stringProp>
           <stringProp name="kafkaMessage">{
-  &quot;SourceTransactionNumber&quot;: &quot;STN-${__Random(1000000,9999999,txId)}&quot;,
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;${__Random(1000000,9999999,txId)}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,
   &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
   &quot;Currency&quot;: &quot;USD&quot;,
   &quot;Discount&quot;: &quot;&quot;,
@@ -2821,14 +2822,14 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="RESPONSE_CODE">200</stringProp>
           <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
           <stringProp name="REQUEST_DATA">{
-  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;${__Random(1000000,9999999,txId)}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,
   &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,
   &quot;Currency&quot;: &quot;USD&quot;,
   &quot;Discount&quot;: &quot;&quot;,
   &quot;Tax&quot;: &quot;${mockValues.txTax}&quot;,
   &quot;TransactionType&quot;: &quot;Purchase&quot;,
-  &quot;TransactionTimeStamp&quot;: &quot;${txDate} ${txTime}&quot;,
+  &quot;TransactionTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/01/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
   &quot;SourceCustomerNumber&quot;: &quot;&quot;
 }</stringProp>
           <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
@@ -2851,13 +2852,13 @@ without actual network activity. This helps debugging tests.</stringProp>
             <stringProp name="partitionString"></stringProp>
             <stringProp name="kafkaMessageKey">${txId}</stringProp>
             <stringProp name="kafkaMessage">{
-  &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,
-  &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,
+  &quot;SourceTransactionItemNumber&quot;: &quot;${__Random(1000000,9999999,)}&quot;,
+  &quot;SourceTransactionNumber&quot;: &quot;${txId}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,
   &quot;TransactionType&quot;: &quot;${__RandomString(1,DCSR)}&quot;,
   &quot;Subtype&quot;: &quot;Purchase&quot;,
   &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,
-  &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,
   &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,
   &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,
   &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,
@@ -2957,7 +2958,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="partitionString"></stringProp>
           <stringProp name="kafkaMessageKey">${product_id}</stringProp>
           <stringProp name="kafkaMessage">{
-  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,
   &quot;Name&quot;: &quot;${product_name}&quot;,
   &quot;ProductURL&quot;: &quot;https://pim.marketingco.io/${product_id}&quot;,
   &quot;BrandName&quot;: &quot;${mockValues.productBrand}&quot;,
@@ -2981,7 +2982,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="RESPONSE_CODE">200</stringProp>
           <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
           <stringProp name="REQUEST_DATA">{
-  &quot;SourceProductNumber&quot;: &quot;SPN-${product_id}&quot;,
+  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,
   &quot;Name&quot;: &quot;${product_name}&quot;,
   &quot;ProductURL&quot;: &quot;https://pim.marketingco.io/${product_id}&quot;,
   &quot;BrandName&quot;: &quot;${mockValues.productBrand}&quot;,
@@ -3056,7 +3057,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="partitionString"></stringProp>
           <stringProp name="kafkaMessageKey">${store_id}</stringProp>
           <stringProp name="kafkaMessage">{
-  &quot;SourceOrganizationNumber&quot;: &quot;SON-${store_id}&quot;,
+  &quot;SourceOrganizationNumber&quot;: &quot;${store_id}&quot;,
   &quot;Name&quot;: &quot;${store_name}&quot;,
   &quot;Status&quot;: &quot;Open&quot;,
   &quot;OrganizationType&quot;: &quot;${__RandomString(1,DPWO)}&quot;,

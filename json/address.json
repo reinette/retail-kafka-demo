@@ -8,7 +8,8 @@
   "value": {
     "type": "JSON",
     "data": {
-      "SourceAddressNumber": "SAN-${addressId}",
+      "SourceAddressNumber": "${addressId}",
+      "SourceCustomerNumber": "${accountId}",
       "AddressType":"${__RandomString(1,HWU)}",
       "Address1": "${unumber} ${__changeCase(${__V(${address})},CAPITALIZE,)}", 
       "Address2": "",
