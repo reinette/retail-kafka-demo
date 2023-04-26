@@ -19,6 +19,11 @@
             <stringProp name="Argument.metadata">=</stringProp>
             <stringProp name="Argument.desc">Kafka Broker</stringProp>
           </elementProp>
+          <elementProp name="KSQLDB_CLUSTER" elementType="Argument">
+            <stringProp name="Argument.name">KSQLDB_CLUSTER</stringProp>
+            <stringProp name="Argument.value">pksqlc-oyry9.us-west4.gcp.confluent.cloud</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
           <elementProp name="CLUSTER_ID" elementType="Argument">
             <stringProp name="Argument.name">CLUSTER_ID</stringProp>
             <stringProp name="Argument.value">lkc-128jjz</stringProp>
@@ -226,7 +231,7 @@
       <kg.apc.jmeter.config.VariablesFromCSV guiclass="kg.apc.jmeter.config.VariablesFromCSVGui" testclass="kg.apc.jmeter.config.VariablesFromCSV" testname="Secrets - secrets.csv" enabled="true">
         <collectionProp name="Arguments.arguments"/>
         <stringProp name="TestPlan.comments">Do not commit this file to your repo :) Provides CC_KEY and CC_SECRET</stringProp>
-        <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-workshop/secrets.csv</stringProp>
+        <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/secrets.csv</stringProp>
         <stringProp name="variablesPrefix"></stringProp>
         <stringProp name="delimiter">,</stringProp>
         <intProp name="skipLines">0</intProp>
@@ -278,6 +283,13 @@
             <stringProp name="Authorization.url">https://${KAFKA_BROKER}</stringProp>
             <stringProp name="Authorization.username">${CC_KEY}</stringProp>
             <stringProp name="Authorization.password">${CC_SECRET}</stringProp>
+            <stringProp name="Authorization.domain"></stringProp>
+            <stringProp name="Authorization.realm"></stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Authorization">
+            <stringProp name="Authorization.url">https://${KSQLDB_CLUSTER}</stringProp>
+            <stringProp name="Authorization.username">${KSQLDB_KEY}</stringProp>
+            <stringProp name="Authorization.password">${KSQLDB_SECRET}</stringProp>
             <stringProp name="Authorization.domain"></stringProp>
             <stringProp name="Authorization.realm"></stringProp>
           </elementProp>
@@ -562,7 +574,7 @@
         <stringProp name="serializerValue">org.apache.kafka.common.serialization.StringSerializer</stringProp>
       </com.di.jmeter.kafka.config.KafkaProducerConfig>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing Data Query - REST" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing Data ksqlDB Query - REST" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -579,7 +591,7 @@
         <stringProp name="TestPlan.comments">Ask a kTable for some information about a customer</stringProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Event" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Event" enabled="false">
           <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
           <stringProp name="cacheKey">false</stringProp>
           <stringProp name="filename">/Users/rstephen/Projects/Demos/retail-kafka-demo/functions/events.gs</stringProp>
@@ -588,6 +600,48 @@
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223Sampler>
         <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Table Query" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+  &quot;ksql&quot;: &quot;select * from CUSTOMERS_BY_STATE EMIT CHANGES;&quot;&#xd;
+  &quot;streamProperties&quot;:{}&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${KSQLDB_CLUSTER}</stringProp>
+          <stringProp name="HTTPSampler.port">443</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/query</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re">http.?://${DOMAIN}/.*</stringProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
         <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Generate cookie" enabled="true">
           <stringProp name="TestPlan.comments">Pick random store; 85 in total</stringProp>
           <stringProp name="variableName">cookie</stringProp>
@@ -599,7 +653,7 @@
         </RandomVariableConfig>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing - Email or SMS Action - REST" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing - Email or SMS Action - REST" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -879,13 +933,13 @@ try {
         </GaussianRandomTimer>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Website Clickstream - REST Produce" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Website Clickstream - REST Produce" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">25</stringProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${RAMP.SHORT}</stringProp>
         <longProp name="ThreadGroup.start_time">1435686326000</longProp>
         <longProp name="ThreadGroup.end_time">1435686326000</longProp>
@@ -998,7 +1052,6 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
             <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream View" enabled="true">
-            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
@@ -1037,6 +1090,7 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
                 </elementProp>
               </collectionProp>
             </elementProp>
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -1330,30 +1384,49 @@ try {
                   <stringProp name="Argument.value">{&#xd;
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
-  &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
-    &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;&#xd;
+  &quot;key&quot;: { &#xd;
+  	&quot;type&quot;: &quot;JSON&quot;,&#xd;
+  	&quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-	  &quot;Cookie&quot;: &quot;${cookie}&quot;,&#xd;
-	  &quot;EventType&quot;:&quot;checkout&quot;,&#xd;
-	  &quot;Subtype&quot;: &quot;&quot;,&#xd;
-	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,&#xd;
-	  &quot;Email&quot;: &quot;${email}&quot;,&#xd;
-	  &quot;Referer&quot;: &quot;&quot;,&#xd;
-	  &quot;URL&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,&#xd;
-	  &quot;SourceMessageNumber&quot;: &quot;&quot;,&#xd;
-	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,&#xd;
-	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,&#xd;
-	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,&#xd;
-	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,&#xd;
-	  &quot;UserClient&quot;: &quot;&quot;,&#xd;
-	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,&#xd;
-	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,&#xd;
-	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;&#xd;
+      &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,&#xd;
+      &quot;AccountID&quot;: &quot;${accountId}&quot;,&#xd;
+      &quot;AmpClientId&quot;: &quot;&quot;,&#xd;
+      &quot;FirstName&quot;: &quot;${__changeCase(${__V(${given})},CAPITALIZE,)}&quot;,&#xd;
+      &quot;MiddleName&quot;: &quot;${__RandomString(1,ABCDEFGHIJKLMNOPQRSTUVWXYZ)}&quot;,&#xd;
+      &quot;LastName&quot;: &quot;${__changeCase(${__V(${family})},CAPITALIZE,)}&quot;,&#xd;
+      &quot;Gender&quot;: &quot;${__RandomString(1,MFU)}&quot;,&#xd;
+      &quot;Email&quot;: &quot;${__changeCase(${__V(${given})}${__V(${family})},LOWER,)}${__Random(1,99)}@${__RandomString(10,aaabcdeeeeefghiiijklmnoooprstuuuvwy)}.com&quot;,&#xd;
+      &quot;PrimaryPhone&quot;: &quot;${__Random(100,999)}-${__Random(100,999)}-${__Random(1000,9999)}&quot;,&#xd;
+      &quot;PrimaryPhoneValidity&quot;: &quot;&quot;,&#xd;
+      &quot;BirthMonth&quot;: &quot;&quot;,&#xd;
+      &quot;BirthYear&quot;: &quot;&quot;,&#xd;
+      &quot;BirthDay&quot;: &quot;&quot;,&#xd;
+      &quot;Age&quot;: &quot;&quot;,&#xd;
+      &quot;BirthDate&quot;: &quot;&quot;,&#xd;
+      &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,&#xd;
+      &quot;DateModified&quot;: &quot;${__time(yyyy/MM/dd,)}&quot;,&#xd;
+      &quot;MobileAdvertisingId&quot;: &quot;&quot;,&#xd;
+      &quot;MobileDeviceId&quot;: &quot;${__RandomString(8,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}&quot;,&#xd;
+      &quot;DoNotEmail&quot;: &quot;${__RandomString(1,YNU)}&quot;,&#xd;
+      &quot;DoNotCall&quot;: &quot;${__RandomString(1,YNU)}&quot;,&#xd;
+      &quot;DoNotText&quot;: &quot;${__RandomString(1,YNU)}&quot;,&#xd;
+      &quot;DoNotMail&quot;: &quot;${__RandomString(1,YNU)}&quot;,&#xd;
+      &quot;Company&quot;: &quot;&quot;,&#xd;
+      &quot;Cookie&quot;: &quot;&quot;,&#xd;
+      &quot;DeleteFlag&quot;: &quot;&quot;,&#xd;
+      &quot;EmailOptInDate&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,&#xd;
+      &quot;EmailOptOutDate&quot;: &quot;&quot;,&#xd;
+      &quot;FacebookID&quot;: &quot;&quot;,&#xd;
+      &quot;NameCodes&quot;: &quot;&quot;,&#xd;
+      &quot;PhoneValidationResultCodes&quot;: &quot;&quot;,&#xd;
+      &quot;SourceAccountNumber&quot;: &quot;&quot;,&#xd;
+      &quot;State&quot;: &quot;${state}&quot;,&#xd;
+      &quot;UUID&quot;: &quot;${__UUID()}&quot;,&#xd;
+      &quot;WebAccountID&quot;: &quot;&quot;,&#xd;
+      &quot;TwitterID&quot;: &quot;&quot;&#xd;
     }&#xd;
   }&#xd;
 }</stringProp>
@@ -1394,7 +1467,7 @@ try {
             </GaussianRandomTimer>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream Checkout" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream Event - Checkout" enabled="true">
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
@@ -1449,6 +1522,7 @@ try {
             <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="TestPlan.comments">Now we have SourceCustomerNumber in our events stream</stringProp>
           </HTTPSamplerProxy>
           <hashTree>
             <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
@@ -1472,8 +1546,8 @@ try {
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
   &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
-    &quot;data&quot;: &quot;${__Random(100000,999999,addressId)}&quot;&#xd;
+  	&quot;type&quot;: &quot;JSON&quot;,&#xd;
+  	&quot;data&quot;: &quot;${__Random(100000,999999,addressId)}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
@@ -1556,9 +1630,9 @@ try {
                   <stringProp name="Argument.value">{&#xd;
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
-  &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
-    &quot;data&quot;: &quot;${addressId}&quot;&#xd;
+  &quot;key&quot;: { &#xd;
+  	&quot;type&quot;: &quot;JSON&quot;,&#xd;
+  	&quot;data&quot;: &quot;${addressId}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
@@ -1613,30 +1687,49 @@ try {
             <stringProp name="REQUEST_DATA">{
   &quot;partition_id&quot;: null,
   &quot;headers&quot;: [],
-  &quot;key&quot;: {
-    &quot;type&quot;: &quot;KAFKA&quot;,
-    &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;
+  &quot;key&quot;: { 
+  	&quot;type&quot;: &quot;JSON&quot;,
+  	&quot;data&quot;: { &quot;${__Random(100000,999999,accountId)}&quot;
   },
   &quot;value&quot;: {
     &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: {
-	  &quot;Cookie&quot;: &quot;${cookie}&quot;,
-	  &quot;EventType&quot;:&quot;checkout&quot;,
-	  &quot;Subtype&quot;: &quot;&quot;,
-	  &quot;EventTimeStamp&quot;: &quot;${__RandomDate(yyyy/MM/dd,2023/04/01,2023/04/23,,txDate)} ${__Random(0,1,)}${__Random(0,9,)}:${__Random(0,5,)}${__Random(0,9,)}&quot;,
-	  &quot;Email&quot;: &quot;${email}&quot;,
-	  &quot;Referer&quot;: &quot;&quot;,
-	  &quot;URL&quot;: &quot;&quot;,
-	  &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,
-	  &quot;SourceMessageNumber&quot;: &quot;&quot;,
-	  &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,
-	  &quot;SourceProductCategoryNumber&quot;: &quot;${__Random(1,44,)}&quot;,
-	  &quot;SourceTransactionNumber&quot;: &quot;&quot;,
-	  &quot;SearchTerm&quot;: &quot;${searchTerm}&quot;,
-	  &quot;UserClient&quot;: &quot;&quot;,
-	  &quot;DeviceType&quot;: &quot;${mockValues.deviceType}&quot;,
-	  &quot;OperatingSystem&quot;: &quot;${mockValues.osType}&quot;,
-	  &quot;Browser&quot;: &quot;${mockValues.browserType}&quot;
+      &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;,
+      &quot;AccountID&quot;: &quot;${accountId}&quot;,
+      &quot;AmpClientId&quot;: &quot;&quot;,
+      &quot;FirstName&quot;: &quot;${__changeCase(${__V(${given})},CAPITALIZE,)}&quot;,
+      &quot;MiddleName&quot;: &quot;${__RandomString(1,ABCDEFGHIJKLMNOPQRSTUVWXYZ)}&quot;,
+      &quot;LastName&quot;: &quot;${__changeCase(${__V(${family})},CAPITALIZE,)}&quot;,
+      &quot;Gender&quot;: &quot;${__RandomString(1,MFU)}&quot;,
+      &quot;Email&quot;: &quot;${__changeCase(${__V(${given})}${__V(${family})},LOWER,)}${__Random(1,99)}@${__RandomString(10,aaabcdeeeeefghiiijklmnoooprstuuuvwy)}.com&quot;,
+      &quot;PrimaryPhone&quot;: &quot;${__Random(100,999)}-${__Random(100,999)}-${__Random(1000,9999)}&quot;,
+      &quot;PrimaryPhoneValidity&quot;: &quot;&quot;,
+      &quot;BirthMonth&quot;: &quot;&quot;,
+      &quot;BirthYear&quot;: &quot;&quot;,
+      &quot;BirthDay&quot;: &quot;&quot;,
+      &quot;Age&quot;: &quot;&quot;,
+      &quot;BirthDate&quot;: &quot;&quot;,
+      &quot;DateCreated&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
+      &quot;DateModified&quot;: &quot;${__time(yyyy/MM/dd,)}&quot;,
+      &quot;MobileAdvertisingId&quot;: &quot;&quot;,
+      &quot;MobileDeviceId&quot;: &quot;${__RandomString(8,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}-${__RandomString(4,abcdefghijklmnopqrstuvwxyz0123456789)}&quot;,
+      &quot;DoNotEmail&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+      &quot;DoNotCall&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+      &quot;DoNotText&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+      &quot;DoNotMail&quot;: &quot;${__RandomString(1,YNU)}&quot;,
+      &quot;Company&quot;: &quot;&quot;,
+      &quot;Cookie&quot;: &quot;&quot;,
+      &quot;DeleteFlag&quot;: &quot;&quot;,
+      &quot;EmailOptInDate&quot;: &quot;${__RandomDate(yyyy/MM/dd,2014/08/07,2023/04/20,,)}&quot;,
+      &quot;EmailOptOutDate&quot;: &quot;&quot;,
+      &quot;FacebookID&quot;: &quot;&quot;,
+      &quot;NameCodes&quot;: &quot;&quot;,
+      &quot;PhoneValidationResultCodes&quot;: &quot;&quot;,
+      &quot;SourceAccountNumber&quot;: &quot;&quot;,
+      &quot;State&quot;: &quot;${state}&quot;,
+      &quot;UUID&quot;: &quot;${__UUID()}&quot;,
+      &quot;WebAccountID&quot;: &quot;&quot;,
+      &quot;TwitterID&quot;: &quot;&quot;
     }
   }
 }</stringProp>
@@ -1768,7 +1861,7 @@ try {
   &quot;partition_id&quot;: null,
   &quot;headers&quot;: [],
   &quot;key&quot;: {
-    &quot;type&quot;: &quot;KAFKA&quot;,
+    &quot;type&quot;: &quot;JSON&quot;,
     &quot;data&quot;: &quot;${__Random(100000,999999,addressId)}&quot;
   },
   &quot;value&quot;: {
@@ -2105,14 +2198,14 @@ try {
                     <stringProp name="Argument.value">{&#xd;
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
-  &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
-    &quot;data&quot;: &quot;${txId}&quot;&#xd;
+  &quot;key&quot;: { &#xd;
+  	&quot;type&quot;: &quot;JSON&quot;,&#xd;
+  	&quot;data&quot;: &quot;${__Random(1000000,9999999,txId)}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-      &quot;SourceTransactionNumber&quot;: &quot;${__Random(1000000,9999999,txId)}&quot;,&#xd;
+      &quot;SourceTransactionNumber&quot;: &quot;${txId}&quot;,&#xd;
       &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,&#xd;
       &quot;Total&quot;: &quot;${mockValues.txSalePrice}&quot;,&#xd;
       &quot;Currency&quot;: &quot;USD&quot;,&#xd;
@@ -2211,10 +2304,7 @@ without actual network activity. This helps debugging tests.</stringProp>
                       <stringProp name="Argument.value">{&#xd;
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
-  &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
-    &quot;data&quot;: &quot;${txId}&quot;&#xd;
-  },&#xd;
+  &quot;key&quot;: { &quot;${txId}&quot; },&#xd;
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
@@ -2348,7 +2438,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">25</stringProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
         <stringProp name="ThreadGroup.ramp_time">0</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
@@ -2586,7 +2676,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
           <FloatProperty>
             <name>ThroughputController.percentThroughput</name>
-            <value>100.0</value>
+            <value>10.0</value>
             <savedValue>0.0</savedValue>
           </FloatProperty>
           <stringProp name="TestPlan.comments">Limited to a percentage of total customer leads</stringProp>
@@ -2758,7 +2848,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">5</stringProp>
         <stringProp name="ThreadGroup.ramp_time">0</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
@@ -3212,7 +3302,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           </hashTree>
         </hashTree>
       </hashTree>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>

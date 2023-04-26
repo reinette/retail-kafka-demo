@@ -47,3 +47,8 @@ org.apache.kafka.common.security.plain.PlainLoginModule required username='[CC_A
 CC_KEY,[CC_PRODUCER_KEY]
 
 CC_SECRET,[CC_PRODUCER_SECRET]
+
+### Gotchas
+
+* In the 'Values' samplers, you'll need to update the path to point to your own directory; no relative pathing here.
+* In the Secrets config element, you'll need to update the path to point to your own file.
