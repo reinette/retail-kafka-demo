@@ -616,6 +616,18 @@
         <stringProp name="TestPlan.comments">Martech Events</stringProp>
       </ThreadGroup>
       <hashTree>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="96619420">email</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="-2077546080">
+              <stringProp name="75152863">${__changeCase(${__V(${given})}${__V(${family})},LOWER,)}${__Random(1,99)}@${__RandomString(10,aaabcdeeeeefghiiijklmnoooprstuuuvwy)}.com</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">true</boolProp>
+        </UserParameters>
+        <hashTree/>
         <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Values - Event" enabled="true">
           <stringProp name="TestPlan.comments">Create pricing data so transactions can look real</stringProp>
           <stringProp name="cacheKey">false</stringProp>
@@ -624,20 +636,7 @@
           <stringProp name="script"></stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223Sampler>
-        <hashTree>
-          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-            <collectionProp name="UserParameters.names">
-              <stringProp name="96619420">email</stringProp>
-            </collectionProp>
-            <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-2077546080">
-                <stringProp name="75152863">${__changeCase(${__V(${given})}${__V(${family})},LOWER,)}${__Random(1,99)}@${__RandomString(10,aaabcdeeeeefghiiijklmnoooprstuuuvwy)}.com</stringProp>
-              </collectionProp>
-            </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
-          </UserParameters>
-          <hashTree/>
-        </hashTree>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Martech Event" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -648,7 +647,7 @@
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
   &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
     &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
@@ -886,7 +885,7 @@ try {
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">15</stringProp>
+        <stringProp name="ThreadGroup.num_threads">25</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${RAMP.SHORT}</stringProp>
         <longProp name="ThreadGroup.start_time">1435686326000</longProp>
         <longProp name="ThreadGroup.end_time">1435686326000</longProp>
@@ -1307,7 +1306,7 @@ try {
           <intProp name="ThroughputController.maxThroughput">100</intProp>
           <FloatProperty>
             <name>ThroughputController.percentThroughput</name>
-            <value>10.0</value>
+            <value>100.0</value>
             <savedValue>0.0</savedValue>
           </FloatProperty>
           <stringProp name="TestPlan.comments">Now the customer has filled in some data; unite their anonymous cookie with customer data!</stringProp>
@@ -1332,7 +1331,7 @@ try {
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
   &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
     &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
@@ -1473,7 +1472,7 @@ try {
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
   &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
     &quot;data&quot;: &quot;${__Random(100000,999999,addressId)}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
@@ -1558,7 +1557,7 @@ try {
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
   &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
     &quot;data&quot;: &quot;${addressId}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
@@ -1615,7 +1614,7 @@ try {
   &quot;partition_id&quot;: null,
   &quot;headers&quot;: [],
   &quot;key&quot;: {
-    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;type&quot;: &quot;KAFKA&quot;,
     &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;
   },
   &quot;value&quot;: {
@@ -1769,7 +1768,7 @@ try {
   &quot;partition_id&quot;: null,
   &quot;headers&quot;: [],
   &quot;key&quot;: {
-    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;type&quot;: &quot;KAFKA&quot;,
     &quot;data&quot;: &quot;${__Random(100000,999999,addressId)}&quot;
   },
   &quot;value&quot;: {
@@ -1936,7 +1935,7 @@ try {
   &quot;partition_id&quot;: null,
   &quot;headers&quot;: [],
   &quot;key&quot;: {
-    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;type&quot;: &quot;KAFKA&quot;,
     &quot;data&quot;: &quot;${addressId}&quot;
   },
   &quot;value&quot;: {
@@ -2107,7 +2106,7 @@ try {
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
   &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
     &quot;data&quot;: &quot;${txId}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
@@ -2213,7 +2212,7 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
   &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;JSON&quot;,&#xd;
+    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
     &quot;data&quot;: &quot;${txId}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
@@ -2343,13 +2342,13 @@ without actual network activity. This helps debugging tests.</stringProp>
         </GaussianRandomTimer>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Customers &amp; Purchases" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Customers &amp; Purchases" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">15</stringProp>
+        <stringProp name="ThreadGroup.num_threads">25</stringProp>
         <stringProp name="ThreadGroup.ramp_time">0</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
@@ -2458,7 +2457,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="kafkaProducerClientVariableName">KafkaCustomerProducerClient</stringProp>
           <stringProp name="kafkaTopic">retail.customers.addresses</stringProp>
           <stringProp name="partitionString"></stringProp>
-          <stringProp name="kafkaMessageKey">${accountId}-${addressId}</stringProp>
+          <stringProp name="kafkaMessageKey">${addressId}</stringProp>
           <stringProp name="kafkaMessage">{
   &quot;SourceAddressNumber&quot;: &quot;${addressId}&quot;,
   &quot;SourceCustomerNumber&quot;: &quot;${accountId}&quot;
