@@ -23,16 +23,19 @@
             <stringProp name="Argument.name">KSQLDB_CLUSTER</stringProp>
             <stringProp name="Argument.value">pksqlc-oyry9.us-west4.gcp.confluent.cloud</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">ksqlDB cluster</stringProp>
           </elementProp>
           <elementProp name="CLUSTER_ID" elementType="Argument">
             <stringProp name="Argument.name">CLUSTER_ID</stringProp>
             <stringProp name="Argument.value">lkc-128jjz</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Cluster ID</stringProp>
           </elementProp>
           <elementProp name="HTTPS" elementType="Argument">
             <stringProp name="Argument.name">HTTPS</stringProp>
             <stringProp name="Argument.value">443</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Port</stringProp>
           </elementProp>
           <elementProp name="USER.DELAY" elementType="Argument">
             <stringProp name="Argument.name">USER.DELAY</stringProp>
@@ -574,7 +577,7 @@
         <stringProp name="serializerValue">org.apache.kafka.common.serialization.StringSerializer</stringProp>
       </com.di.jmeter.kafka.config.KafkaProducerConfig>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing Data ksqlDB Query - REST" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing Data ksqlDB Query - REST" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -653,7 +656,7 @@
         </RandomVariableConfig>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing - Email or SMS Action - REST" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Marketing - Email or SMS Action - REST" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -701,7 +704,7 @@
   &quot;partition_id&quot;: null,&#xd;
   &quot;headers&quot;: [],&#xd;
   &quot;key&quot;: {&#xd;
-    &quot;type&quot;: &quot;KAFKA&quot;,&#xd;
+    &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: &quot;${__Random(100000,999999,accountId)}&quot;&#xd;
   },&#xd;
   &quot;value&quot;: {&#xd;
@@ -933,13 +936,13 @@ try {
         </GaussianRandomTimer>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Website Clickstream - REST Produce" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Website Clickstream - REST Produce" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">15</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${RAMP.SHORT}</stringProp>
         <longProp name="ThreadGroup.start_time">1435686326000</longProp>
         <longProp name="ThreadGroup.end_time">1435686326000</longProp>
@@ -1052,6 +1055,7 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
             <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Clickstream View" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
@@ -1090,7 +1094,6 @@ vars.put(&apos;mockValues.eventType&apos;, eventType[eventTypeIdx]);</stringProp
                 </elementProp>
               </collectionProp>
             </elementProp>
-            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <stringProp name="HTTPSampler.domain">${KAFKA_BROKER}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -1360,7 +1363,7 @@ try {
           <intProp name="ThroughputController.maxThroughput">100</intProp>
           <FloatProperty>
             <name>ThroughputController.percentThroughput</name>
-            <value>100.0</value>
+            <value>10.0</value>
             <savedValue>0.0</savedValue>
           </FloatProperty>
           <stringProp name="TestPlan.comments">Now the customer has filled in some data; unite their anonymous cookie with customer data!</stringProp>
@@ -2308,13 +2311,13 @@ without actual network activity. This helps debugging tests.</stringProp>
   &quot;value&quot;: {&#xd;
     &quot;type&quot;: &quot;JSON&quot;,&#xd;
     &quot;data&quot;: {&#xd;
-      &quot;SourceTransactionItemNumber&quot;: &quot;STIN-${__Random(1000000,9999999,)}&quot;,&#xd;
-      &quot;SourceTransactionNumber&quot;: &quot;STN-${txId}&quot;,&#xd;
-      &quot;SourceOrganizationNumber&quot;: &quot;SON-${txOrg}&quot;,&#xd;
+      &quot;SourceTransactionItemNumber&quot;: &quot;${__Random(1000000,9999999,)}&quot;,&#xd;
+      &quot;SourceTransactionNumber&quot;: &quot;${txId}&quot;,&#xd;
+      &quot;SourceOrganizationNumber&quot;: &quot;${txOrg}&quot;,&#xd;
       &quot;TransactionType&quot;: &quot;${__RandomString(1,DCSR)}&quot;,&#xd;
       &quot;Subtype&quot;: &quot;Purchase&quot;,&#xd;
       &quot;InvoiceDate&quot;: &quot;${txDate}&quot;,&#xd;
-      &quot;SourceProductNumber&quot;: &quot;SCN-${product_id}&quot;,&#xd;
+      &quot;SourceProductNumber&quot;: &quot;${product_id}&quot;,&#xd;
       &quot;Quantity&quot;: &quot;${__Random(1,10,)}&quot;,&#xd;
       &quot;Weight&quot;: &quot;${__Random(1,10,)}&quot;,&#xd;
       &quot;Volume&quot;: &quot;${__Random(1,10,)}&quot;,&#xd;
@@ -2432,7 +2435,7 @@ without actual network activity. This helps debugging tests.</stringProp>
         </GaussianRandomTimer>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Customers &amp; Purchases" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Customers &amp; Purchases" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -2842,7 +2845,7 @@ without actual network activity. This helps debugging tests.</stringProp>
         </GaussianRandomTimer>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Anon Purchases" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Produce - Create POS Anon Purchases" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -3302,7 +3305,7 @@ without actual network activity. This helps debugging tests.</stringProp>
           </hashTree>
         </hashTree>
       </hashTree>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
